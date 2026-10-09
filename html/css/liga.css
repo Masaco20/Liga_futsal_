@@ -1,0 +1,758 @@
+/* =====================================================
+   Liga Provincial de Futsal Vaca Diez #1 - Estilos propios
+   No toca el CSS de la plantilla (main.css/responsive.css),
+   solo agrega los componentes nuevos del rediseño.
+   ===================================================== */
+
+:root{
+    --liga-verde: #0c6b3d;
+    --liga-verde-oscuro: #073d23;
+    --liga-amarillo: #ffc107;
+    --liga-gris: #f4f6f5;
+}
+
+/* ---------- HERO ---------- */
+.liga-hero{
+    position: relative;
+    overflow: hidden;
+    min-height: 460px;
+    display: flex;
+    align-items: center;
+    color: #fff;
+    background:
+        linear-gradient(120deg, rgba(7,61,35,.92) 10%, rgba(12,107,61,.75) 60%, rgba(7,61,35,.9) 100%),
+        url("../img/liga-hero-placeholder.jpg") center/cover no-repeat;
+    background-color: var(--liga-verde-oscuro);
+}
+.liga-hero .liga-hero-eyebrow{
+    letter-spacing: 3px;
+    font-weight: 600;
+    color: var(--liga-amarillo);
+    font-size: 14px;
+}
+.liga-hero h1{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 46px;
+    line-height: 1.1;
+    margin: 10px 0 18px;
+}
+.liga-hero h1 span{ display:block; }
+.liga-hero p{
+    font-size: 17px;
+    opacity: .92;
+    max-width: 520px;
+}
+.liga-hero .btn-liga-cta{
+    background: var(--liga-amarillo);
+    color: #21260f;
+    font-weight: 700;
+    padding: 12px 28px;
+    border-radius: 6px;
+    display: inline-block;
+    margin-top: 10px;
+    text-decoration: none;
+}
+.liga-hero .btn-liga-cta:hover{ opacity: .9; color: #21260f; }
+
+/* ---------- TARJETAS RESUMEN ---------- */
+.liga-stat-card{
+    background: #fff;
+    border-radius: 10px;
+    padding: 26px 20px;
+    text-align: center;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    height: 100%;
+    transition: transform .15s ease;
+}
+.liga-stat-card:hover{ transform: translateY(-4px); }
+.liga-stat-card .liga-stat-icon{ font-size: 30px; margin-bottom: 10px; }
+.liga-stat-card h3{ font-family: 'Barlow Condensed', sans-serif; font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.liga-stat-card p{ color: #6c7a75; margin-bottom: 0; font-size: 14px; }
+
+/* ---------- SECCIONES ---------- */
+.liga-section{ padding: 55px 0; }
+.liga-section.bg-gray{ background: var(--liga-gris); }
+.liga-section-title{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    letter-spacing: .5px;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+    font-size: 26px;
+    color: var(--liga-verde-oscuro);
+    border-left: 5px solid var(--liga-amarillo);
+    padding-left: 12px;
+}
+
+/* ---------- PROXIMO PARTIDO ---------- */
+.liga-match-card{
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    padding: 24px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.liga-match-card .liga-jornada{
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #8a9a94;
+    margin-bottom: 12px;
+}
+.liga-match-card .liga-teams{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 18px;
+    font-weight: 700;
+    font-size: 18px;
+}
+.liga-match-card .liga-vs{
+    background: var(--liga-verde);
+    color: #fff;
+    border-radius: 50%;
+    width: 34px; height: 34px;
+    display: inline-flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: 700;
+}
+.liga-match-card .liga-meta{
+    margin-top: 14px;
+    color: #6c7a75;
+    font-size: 14px;
+}
+.liga-programados{
+    text-align: center;
+    font-weight: 600;
+    color: var(--liga-verde-oscuro);
+}
+
+/* ---------- TABLA DE POSICIONES ---------- */
+.liga-table-wrap{
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    padding: 10px 5px;
+}
+.liga-table thead th{
+    background: var(--liga-verde-oscuro);
+    color: #fff;
+    border: none;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    padding: 12px 8px;
+}
+.liga-table td{ vertical-align: middle; padding: 10px 8px; }
+.liga-table tr:nth-child(-n+3) td:first-child{
+    font-weight: 800;
+    color: var(--liga-verde);
+}
+
+/* ---------- GOLEADORES ---------- */
+.liga-scorers{
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    padding: 22px;
+}
+.liga-scorers h4{
+    font-weight: 800;
+    font-size: 15px;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+    color: var(--liga-verde-oscuro);
+    margin-bottom: 18px;
+}
+.liga-scorer-item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eef1f0;
+}
+.liga-scorer-item:last-child{ border-bottom: none; }
+.liga-scorer-item .liga-scorer-name{ font-weight: 600; }
+.liga-scorer-item .liga-scorer-goals{
+    background: var(--liga-verde);
+    color: #fff;
+    border-radius: 20px;
+    padding: 2px 12px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* ---------- NOTICIAS ---------- */
+.liga-news-card{
+    background: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 18px rgba(0,0,0,.06);
+    margin-bottom: 24px;
+}
+.liga-news-card img{
+    width: 100%;
+    height: 170px;
+    object-fit: cover;
+    display: block;
+    background: #dfe6e3;
+}
+.liga-news-card .liga-news-body{ padding: 18px; }
+.liga-news-card h5{ font-weight: 700; font-size: 16px; margin-bottom: 10px; }
+.liga-news-card a.liga-read-more{
+    color: var(--liga-verde);
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* ---------- FOOTER ---------- */
+.liga-footer{
+    background: var(--liga-verde-oscuro);
+    color: #dce8e2;
+    padding: 40px 0 20px;
+}
+.liga-footer h5{ color: #fff; font-weight: 700; }
+.liga-footer a{ color: #dce8e2; text-decoration: none; }
+.liga-footer a:hover{ color: var(--liga-amarillo); }
+.liga-footer .liga-social a{
+    display: inline-flex; align-items: center; gap: 8px;
+    margin-right: 18px;
+}
+.liga-footer .liga-copyright{
+    border-top: 1px solid rgba(255,255,255,.12);
+    margin-top: 20px;
+    padding-top: 16px;
+    font-size: 13px;
+    color: #9fb3ab;
+}
+
+/* ---------- TOQUE DE FÚTBOL: fondo de cancha ---------- */
+.liga-pitch-bg{
+    background-color: var(--liga-verde-oscuro);
+    background-image:
+        repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0, rgba(255,255,255,.035) 2px, transparent 2px, transparent 90px),
+        linear-gradient(160deg, var(--liga-verde-oscuro) 0%, var(--liga-verde) 100%);
+}
+
+/* Franja tipo "jersey" bajo el header/hero */
+.liga-hero::after{
+    content: "";
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    height: 6px;
+    background: repeating-linear-gradient(
+        -45deg, var(--liga-amarillo) 0 18px, var(--liga-verde-oscuro) 18px 36px
+    );
+}
+
+/* Escudo circular con iniciales (mientras no subas el escudo real) */
+.liga-crest{
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--liga-verde), var(--liga-verde-oscuro));
+    color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 20px;
+    margin: 0 auto 10px;
+    border: 3px solid var(--liga-amarillo);
+}
+.liga-crest.liga-crest-sm{ width: 40px; height: 40px; font-size: 15px; border-width: 2px; margin: 0; }
+
+/* ---------- LOGIN ---------- */
+.liga-login-card{
+    background: #fff;
+    border-radius: 14px;
+    padding: 40px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 20px 50px rgba(0,0,0,.3);
+    text-align: center;
+}
+.liga-login-crest{
+    width: 74px; height: 74px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--liga-verde), var(--liga-verde-oscuro));
+    color: var(--liga-amarillo);
+    font-size: 30px;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    border: 3px solid var(--liga-amarillo);
+}
+.liga-login-card h2{
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    color: var(--liga-verde-oscuro);
+    font-size: 24px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+}
+.liga-login-sub{ color: #8a9a94; font-size: 13px; margin-bottom: 22px; }
+.liga-login-card .form-group{ text-align: left; }
+.liga-login-back{ color: #8a9a94; font-size: 13px; text-decoration: none; }
+.liga-login-back:hover{ color: var(--liga-verde); }
+
+/* ---------- Responsivo (celular) ---------- */
+@media (max-width: 767px){
+    .liga-hero{ min-height: 360px; text-align: center; }
+    .liga-hero h1{ font-size: 32px; }
+    .liga-hero p{ max-width: 100%; margin-left: auto; margin-right: auto; }
+    .liga-section-title{ font-size: 20px; }
+    .liga-table th, .liga-table td{ padding: 8px 6px; font-size: 13px; }
+    .liga-match-card .liga-teams{ font-size: 15px; gap: 10px; }
+    .liga-login-card{ padding: 26px; }
+}
+
+/* ---------- Menú desplegable al pasar el cursor ---------- */
+.liga-has-dropdown{ position: relative; }
+.liga-dropdown{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: -20px;
+    background: #fff;
+    min-width: 260px;
+    box-shadow: 0 15px 40px rgba(0,0,0,.18);
+    border-radius: 10px;
+    padding: 10px 0;
+    z-index: 999;
+}
+.liga-has-dropdown:hover .liga-dropdown{ display: block; }
+.liga-dropdown a{
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 22px;
+    color: #33443e;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+}
+.liga-dropdown a:hover{ background: #f4f6f5; color: var(--liga-verde); }
+.liga-dropdown a i:first-child{ width: 18px; text-align: center; color: var(--liga-verde); font-size: 15px; }
+.liga-dropdown a::after{
+    content: "\f105"; /* chevron-right de Font Awesome */
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+    margin-left: auto;
+    color: #c2ccc8;
+    font-size: 12px;
+}
+
+/* ---------- Navbar propio (reemplaza el menú de la plantilla) ---------- */
+.liga-navbar{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 26px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.liga-navbar > li{ position: relative; }
+.liga-navbar > li > a{
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    color: #33443e;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    padding: 8px 0;
+}
+.liga-navbar > li > a:hover{ color: var(--liga-verde); }
+.liga-navbar .liga-dropdown a i{ width: 16px; }
+
+@media (max-width: 991px){
+    .liga-navbar{ flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; }
+    .liga-navbar > li{ width: 100%; }
+    .liga-dropdown{ position: static; box-shadow: none; display: block; padding-left: 16px; }
+}
+
+
+/* Menú público más ordenado: las páginas secundarias quedan dentro de “Más opciones”. */
+.menu-area .navbar{display:flex;align-items:center;gap:16px;flex-wrap:nowrap;min-height:82px;}
+.menu-area .navbar-brand{flex:0 0 auto;margin-right:8px;}
+.main-nav-wrap{flex:0 1 auto;min-width:0;}
+.liga-navbar{display:flex;align-items:center;flex-wrap:nowrap;gap:18px;white-space:nowrap;}
+.liga-navbar>li> a{padding:12px 0;font-size:13px;}
+.liga-dropdown-scroll{max-height:250px;overflow-y:auto;overscroll-behavior:contain;}
+.liga-dropdown-scroll::-webkit-scrollbar{width:7px;}
+.liga-dropdown-scroll::-webkit-scrollbar-track{background:#f1f4f2;border-radius:8px;}
+.liga-dropdown-scroll::-webkit-scrollbar-thumb{background:#aabbb1;border-radius:8px;}
+.liga-dropdown-scroll::-webkit-scrollbar-thumb:hover{background:#0c6b3d;}
+.liga-more-menu .liga-dropdown{min-width:230px;}
+@media(max-width:1199px) and (min-width:992px){
+ .menu-area .navbar{gap:10px;}
+ .liga-navbar{gap:12px;}
+ .liga-navbar>li>a{font-size:12px;display:flex;align-items:center;gap:6px;white-space:nowrap;padding:7px 2px;}
+ .menu-area .search-box{margin-right:8px;}
+}
+@media(max-width:991px){
+ .menu-area .navbar{display:block;min-height:0;}
+ .main-nav-wrap{width:100%;}
+ .liga-navbar{display:flex;flex-direction:column;align-items:stretch;gap:2px;white-space:normal;width:100%;}
+ .liga-navbar>li{width:100%;}
+ .liga-navbar>li>a{padding:10px 12px;border-radius:6px;}
+ .liga-navbar>li>a:hover{background:#f2f6f3;}
+ .liga-dropdown-scroll{max-height:190px;overflow-y:auto;}
+ .liga-more-menu .liga-dropdown{position:static;display:none;box-shadow:none;border:1px solid #e6ece8;background:#f8faf9;margin:2px 0 8px 12px;max-width:calc(100% - 12px);}
+ .liga-more-menu:hover .liga-dropdown,.liga-more-menu:focus-within .liga-dropdown{display:block;}
+}
+
+/* =====================================================
+   REDISEÑO: navegación pública + próxima fecha compacta
+   ===================================================== */
+.liga-navbar{gap:24px;align-items:center;}
+.liga-navbar>li>a{font-size:12px;display:flex;align-items:center;gap:6px;white-space:nowrap;padding:7px 2px;}
+.liga-navbar>li>a i.d-inline{margin-right:0;font-size:12px;flex:0 0 auto;}
+
+.liga-upcoming-section{padding-top:48px;padding-bottom:48px;}
+.liga-upcoming-heading{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;margin-bottom:18px;}
+.liga-upcoming-heading .liga-section-title{margin-bottom:3px;}
+.liga-upcoming-kicker{font-size:11px;letter-spacing:2px;font-weight:800;color:var(--liga-verde);margin-bottom:3px;}
+.liga-upcoming-subtitle{margin:0;color:#71807a;font-size:14px;}
+.liga-upcoming-all{font-weight:800;color:var(--liga-verde);font-size:13px;text-decoration:none;white-space:nowrap;padding-bottom:8px;}
+.liga-upcoming-all:hover{text-decoration:underline;color:var(--liga-verde-oscuro);}
+.liga-upcoming-list{display:flex;flex-direction:column;gap:8px;}
+.liga-upcoming-row{display:grid;grid-template-columns:105px minmax(0,1fr) 90px 28px;align-items:center;gap:16px;background:#fff;border:1px solid #e4ebe7;border-radius:12px;padding:13px 16px;color:#18251f;text-decoration:none;box-shadow:0 2px 10px rgba(0,0,0,.035);transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;}
+.liga-upcoming-row:hover{color:#18251f;text-decoration:none;transform:translateY(-1px);box-shadow:0 5px 16px rgba(0,0,0,.07);border-color:#cbd9d1;}
+.liga-upcoming-time{display:flex;flex-direction:column;line-height:1.15;}
+.liga-upcoming-time strong{font-size:17px;color:var(--liga-verde-oscuro);}
+.liga-upcoming-time span{font-size:11px;color:#89958f;margin-top:3px;text-transform:capitalize;}
+.liga-upcoming-teams{display:flex;align-items:center;gap:11px;min-width:0;font-size:15px;}
+.liga-upcoming-teams strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.liga-upcoming-vs{width:27px;height:27px;flex:0 0 27px;border-radius:50%;background:var(--liga-verde);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:9px;font-weight:900;}
+.liga-upcoming-group{font-size:11px;font-weight:800;color:#71807a;text-align:center;background:#f2f6f3;border-radius:20px;padding:5px 8px;}
+.liga-upcoming-arrow{color:var(--liga-verde);font-size:12px;text-align:right;}
+.liga-programados{font-size:12px;font-weight:600;color:#71807a;margin-top:12px;margin-bottom:0;}
+.liga-upcoming-placeholder,.liga-upcoming-empty{background:#fff;border:1px dashed #ccd9d2;border-radius:12px;padding:24px;text-align:center;color:#71807a;}
+.liga-upcoming-empty{display:flex;flex-direction:column;align-items:center;gap:5px;}
+.liga-upcoming-empty i{font-size:24px;color:var(--liga-verde);margin-bottom:3px;}
+.liga-upcoming-empty strong{color:#23352d;}
+@media(max-width:900px){.liga-navbar{gap:9px}.liga-navbar>li>a{font-size:11px}.liga-upcoming-row{grid-template-columns:85px minmax(0,1fr) 65px 20px;gap:10px;}}
+@media(max-width:700px){.liga-upcoming-heading{align-items:flex-start;flex-direction:column;gap:6px}.liga-upcoming-all{padding-bottom:0}.liga-upcoming-row{grid-template-columns:70px minmax(0,1fr) 20px;padding:12px}.liga-upcoming-group{display:none}.liga-upcoming-teams{font-size:14px;gap:7px}.liga-upcoming-time strong{font-size:15px}.liga-upcoming-time span{font-size:10px}.liga-upcoming-arrow{font-size:11px;}}
+
+/* Ajuste definitivo del encabezado público: menú completo visible en escritorio. */
+.menu-area .navbar{gap:10px;}
+.menu-area .navbar .main-nav-wrap{flex:0 1 auto;min-width:0;}
+.menu-area .navbar .liga-navbar{gap:11px;white-space:nowrap;}
+.menu-area .navbar .liga-navbar>li>a{font-size:12px;padding:10px 0;}
+.menu-area .navbar .inline-form{width:auto !important;flex:1 1 240px;min-width:210px;max-width:300px;margin:0;}
+.menu-area .navbar .search-box{width:100%;margin:0;}
+.menu-area .navbar .sign-in-box{flex:0 0 auto;white-space:nowrap;}
+@media(max-width:1199px) and (min-width:992px){
+  .menu-area .navbar{gap:7px;}
+  .menu-area .navbar .liga-navbar{gap:8px;}
+  .menu-area .navbar .liga-navbar>li>a{font-size:11px;}
+  .menu-area .navbar .inline-form{min-width:170px;max-width:230px;}
+}
+@media(max-width:991px){
+  .menu-area .navbar .inline-form{width:100% !important;max-width:none;}
+}
+
+/* Próxima fecha: más deportiva y viva, sin tarjetas gigantes. */
+.liga-upcoming-section{background:linear-gradient(180deg,#f5f8f6 0%,#eef3f0 100%);}
+.liga-upcoming-list{background:#fff;border:1px solid #e0e9e4;border-radius:16px;overflow:hidden;box-shadow:0 8px 24px rgba(15,81,50,.06);gap:0;}
+.liga-upcoming-row{position:relative;border:0;border-bottom:1px solid #e8eeeb;border-radius:0;box-shadow:none;padding:14px 18px;transform:none;}
+.liga-upcoming-row:last-child{border-bottom:0;}
+.liga-upcoming-row:before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:#0f5132;opacity:.9;}
+.liga-upcoming-row:hover{transform:none;background:#f8fbf9;box-shadow:none;}
+.liga-upcoming-time strong{font-size:16px;}
+.liga-upcoming-vs{width:25px;height:25px;flex-basis:25px;font-size:8px;}
+.liga-upcoming-teams{font-size:14px;}
+.liga-upcoming-group{font-size:10px;}
+.liga-upcoming-all{background:#0f5132;color:#fff;padding:9px 13px;border-radius:8px;}
+.liga-upcoming-all:hover{color:#fff;text-decoration:none;background:#0a4028;}
+
+/* Ajuste final de separación del menú público */
+.menu-area .navbar .liga-navbar{
+  gap:16px;
+}
+.menu-area .navbar .liga-navbar > li > a{
+  gap:6px;
+  font-size:12px;
+  padding:10px 0;
+}
+.menu-area .navbar .liga-navbar > li > a i.d-inline{
+  margin-right:2px;
+}
+.menu-area .navbar .liga-navbar > li > a .fa-chevron-down{
+  margin-left:5px !important;
+}
+.menu-area .navbar .inline-form{
+  flex:1 1 220px;
+  min-width:200px;
+  max-width:270px;
+}
+@media(max-width:1199px) and (min-width:992px){
+  .menu-area .navbar .liga-navbar{gap:13px;}
+  .menu-area .navbar .liga-navbar > li > a{font-size:11.5px;gap:5px;}
+}
+
+/* Historial de campeones para el modo aficionado */
+.liga-historical-champions{margin-top:10px;}
+.historical-title{font-size:13px;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#0f5132;margin-bottom:10px;}
+.historical-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;}
+.historical-champion-card{display:flex;flex-direction:column;align-items:center;text-align:center;background:#fff;border:1px solid #dfe8e3;border-radius:12px;padding:15px 12px;color:#20342a;text-decoration:none;box-shadow:0 4px 14px rgba(15,81,50,.05);transition:transform .12s ease,box-shadow .12s ease,border-color .12s ease;}
+.historical-champion-card:hover{color:#0f5132;text-decoration:none;transform:translateY(-2px);border-color:#b9ccc1;box-shadow:0 7px 18px rgba(15,81,50,.1);}
+.historical-year{font-size:11px;font-weight:800;letter-spacing:1.5px;color:#7a8a83;}
+.historical-trophy{font-size:24px;margin:3px 0;}
+.historical-champion-card strong{font-size:16px;}
+.historical-champion-card span{font-size:11px;color:#7a8a83;margin-top:2px;}
+.historical-champion-card small{font-size:11px;color:#0f5132;margin-top:7px;font-weight:700;}
+@media(max-width:800px){.historical-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:500px){.historical-grid{grid-template-columns:1fr;}}
+
+.liga-match-sync-ok,.liga-match-sync-warning{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:700;padding:7px 11px;border-radius:20px;margin-bottom:8px;}
+.liga-match-sync-ok{background:#e9f6ee;color:#0f6b3e;border:1px solid #cce8d7;}
+.liga-match-sync-warning{background:#fff6df;color:#8a6500;border:1px solid #f0dda4;}
+
+/* Ajuste final de legibilidad del menú público */
+.liga-navbar > li { margin: 0; }
+.liga-navbar > li > a > .fa-chevron-down { margin-left: 2px !important; }
+@media (max-width: 1100px) {
+  .liga-navbar { gap: 14px; }
+  .liga-navbar > li > a { gap: 4px; font-size: 11px; }
+}
+
+/* =====================================================
+   DEFENSA FINAL: navegación pública legible
+   ===================================================== */
+.menu-area .liga-navbar > li > a{
+  display:flex !important;
+  align-items:center;
+  gap:7px !important;
+  min-height:34px;
+  white-space:nowrap;
+}
+.menu-area .liga-navbar > li > a > i:first-child{
+  width:16px;
+  min-width:16px;
+  text-align:center;
+  margin:0 !important;
+  flex:0 0 16px;
+}
+.menu-area .liga-navbar > li > a > .fa-chevron-down{
+  width:auto;
+  min-width:0;
+  flex:0 0 auto;
+  margin-left:2px !important;
+}
+.menu-area .liga-navbar > li{margin:0 1px !important;}
+@media(max-width:1199px) and (min-width:992px){
+  .menu-area .liga-navbar{gap:11px !important;}
+  .menu-area .liga-navbar > li > a{gap:6px !important;font-size:11.5px;}
+}
+
+/* =====================================================
+   DEFENSA: separación real entre icono y texto del menú
+   ===================================================== */
+.menu-area .liga-navbar > li > a{
+  display:flex !important;
+  align-items:center !important;
+  gap:0 !important;
+}
+.menu-area .liga-navbar > li > a > i:first-child{
+  display:inline-flex !important;
+  width:20px !important;
+  min-width:20px !important;
+  flex:0 0 20px !important;
+  justify-content:center !important;
+  align-items:center !important;
+  margin:0 10px 0 0 !important;
+  line-height:1 !important;
+}
+.menu-area .liga-navbar > li > a > span{
+  display:inline-block !important;
+  line-height:1.2 !important;
+}
+.menu-area .liga-navbar > li > a > .fa-chevron-down{
+  margin:0 0 0 9px !important;
+  width:auto !important;
+  min-width:0 !important;
+  flex:0 0 auto !important;
+}
+.menu-area .liga-dropdown > a{
+  display:flex !important;
+  align-items:center !important;
+  gap:0 !important;
+}
+.menu-area .liga-dropdown > a > i:first-child{
+  width:20px !important;
+  min-width:20px !important;
+  flex:0 0 20px !important;
+  margin:0 9px 0 0 !important;
+  text-align:center !important;
+}
+
+/* =====================================================
+   DEFENSA: cuadro de eliminatoria estable y legible
+   ===================================================== */
+.bracket-wrap{
+  grid-template-columns:minmax(220px,1fr) minmax(220px,1fr) minmax(250px,1.08fr) !important;
+  column-gap:52px !important;
+  align-items:stretch !important;
+}
+.bracket-ronda{
+  justify-content:space-around !important;
+  min-height:470px !important;
+}
+.bracket-ronda h6{flex:0 0 auto !important;}
+.bracket-match{width:100%;}
+.bracket-equipo span:not(.pts){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.bracket-conn-right::after{right:-52px !important;width:52px !important;}
+.bracket-conn-right::before{right:-52px !important;}
+.bracket-ronda-2 .bracket-match:after{left:-52px !important;width:52px !important;}
+.bracket-ronda-2 .bracket-match:before{left:-52px !important;}
+@media(max-width:900px){
+  .bracket-wrap{grid-template-columns:240px 240px 260px !important;column-gap:42px !important;}
+  .bracket-conn-right::after{right:-42px !important;width:42px !important;}
+  .bracket-conn-right::before{right:-42px !important;}
+  .bracket-ronda-2 .bracket-match:after{left:-42px !important;width:42px !important;}
+  .bracket-ronda-2 .bracket-match:before{left:-42px !important;}
+}
+
+/* =====================================================
+   DEFENSA 2026 - MODO CELULAR REAL
+   El menú de escritorio no se comprime: en móvil se convierte
+   en un menú limpio y el cuadro de eliminatoria pasa a tarjetas.
+   ===================================================== */
+@media (max-width: 767px){
+  html,body{width:100%;max-width:100%;overflow-x:hidden;}
+  .menu-area{width:100%;}
+  .menu-area .container-xl{width:100%;max-width:none;padding-left:10px;padding-right:10px;}
+  .menu-area .navbar{
+    width:100%;min-height:64px !important;padding:8px 10px !important;
+    display:flex !important;flex-wrap:wrap !important;align-items:center !important;
+    gap:0 !important;position:relative;border-radius:0;
+  }
+  .menu-area .navbar-brand{order:2;display:flex;align-items:center;justify-content:center;margin:0 auto !important;padding:0 !important;}
+  .menu-area .navbar-brand img{max-width:145px;width:auto;height:34px;object-fit:contain;}
+  .menu-area .navbar .mobile-header-buttons{
+    order:1;display:flex !important;align-items:center;gap:3px;
+    list-style:none;margin:0;padding:0 !important;width:auto;
+  }
+  .menu-area .navbar .mobile-header-buttons li{display:block;margin:0;padding:0;}
+  .menu-area .mobile-nav-trigger,.menu-area .mobile-search-trigger{
+    width:40px;height:40px;border-radius:9px;display:flex;align-items:center;justify-content:center;
+    color:#0c6b3d !important;text-decoration:none;background:#eef5f1;
+    position:relative;overflow:hidden;font-size:0;
+  }
+  .menu-area .mobile-nav-trigger:before{content:'☰';font-size:21px;line-height:1;font-weight:700;color:#0c6b3d;}
+  .menu-area .mobile-search-trigger:before{content:'\f002';font-family:'Font Awesome 5 Free';font-weight:900;font-size:15px;color:#0c6b3d;}
+  .menu-area .mobile-nav-trigger span,.menu-area .mobile-search-trigger span{display:none !important;}
+  .menu-area .navbar .main-nav-wrap{
+    order:5;width:100% !important;flex:0 0 100% !important;margin:8px 0 0 !important;
+    display:none !important;background:#fff;border:1px solid #dfe8e3;border-radius:12px;
+    box-shadow:0 8px 22px rgba(15,81,50,.09);padding:7px !important;
+  }
+  .menu-area .navbar .main-nav-wrap.liga-mobile-open{display:block !important;}
+  .menu-area .navbar .liga-navbar{
+    display:flex !important;flex-direction:column !important;align-items:stretch !important;
+    width:100% !important;gap:2px !important;white-space:normal !important;margin:0 !important;
+  }
+  .menu-area .navbar .liga-navbar>li{width:100% !important;margin:0 !important;}
+  .menu-area .navbar .liga-navbar>li>a{
+    width:100%;min-height:42px;padding:10px 11px !important;border-radius:8px;
+    display:flex !important;align-items:center !important;gap:0 !important;
+    font-size:13px !important;white-space:normal !important;color:#263a31 !important;
+  }
+  .menu-area .navbar .liga-navbar>li>a:hover{background:#f1f6f3;}
+  .menu-area .navbar .liga-navbar>li>a>i:first-child{
+    width:22px !important;min-width:22px !important;flex:0 0 22px !important;
+    margin:0 10px 0 0 !important;text-align:center !important;font-size:14px !important;
+  }
+  .menu-area .navbar .liga-navbar>li>a>span{flex:1;line-height:1.2;}
+  .menu-area .navbar .liga-navbar>li>a>.fa-chevron-down{margin:0 0 0 8px !important;}
+  .menu-area .navbar .liga-dropdown{
+    position:static !important;display:none !important;width:auto !important;min-width:0 !important;
+    margin:2px 5px 7px 32px !important;padding:4px !important;
+    border:1px solid #e1e9e5 !important;border-radius:9px !important;box-shadow:none !important;
+    background:#f8faf9 !important;
+  }
+  .menu-area .navbar .liga-has-dropdown.is-open .liga-dropdown{display:block !important;}
+  .menu-area .navbar .liga-dropdown>a{min-height:38px;padding:9px 10px !important;border-radius:7px;}
+  .menu-area .navbar .inline-form{
+    order:4;width:100% !important;flex:0 0 100% !important;max-width:none !important;
+    margin:0 !important;height:0;position:relative;z-index:10;
+  }
+  .menu-area .navbar.liga-search-open .inline-form{height:48px;}
+  .menu-area .navbar .mobile-search{
+    left:0 !important;right:0 !important;top:4px !important;width:100% !important;
+    margin:0 !important;padding:0 !important;border:1px solid #dfe8e3;border-radius:9px;
+    box-shadow:0 7px 18px rgba(0,0,0,.08);overflow:hidden;
+  }
+  .menu-area .navbar .mobile-search.is-visible{
+    position:static !important;display:flex !important;opacity:1 !important;visibility:visible !important;
+  }
+  .menu-area .navbar .sign-in-box{
+    order:6;width:100%;display:none !important;justify-content:center;gap:7px;
+    margin:8px 0 0 !important;padding:0 !important;
+  }
+  .menu-area .navbar .main-nav-wrap.liga-mobile-open ~ .sign-in-box{display:flex !important;}
+  .menu-area .navbar .sign-in-box .btn{font-size:12px;padding:8px 11px;margin:0 !important;border-radius:8px;}
+
+  .liga-section{padding:34px 0 !important;}
+  .liga-section .container,.liga-section .container-lg,.liga-section .container-xl{max-width:none;width:100%;padding-left:12px;padding-right:12px;}
+  .liga-hero{min-height:380px;}
+  .liga-hero h1{font-size:35px;}
+  .liga-hero p{font-size:14px;}
+  .liga-section-title{font-size:23px;margin-bottom:18px;}
+  .liga-stat-card{padding:18px 14px;}
+  .liga-match-card{padding:17px 12px;}
+  .liga-match-card .liga-teams{gap:8px;font-size:15px;}
+  .liga-upcoming-section{padding-top:32px;padding-bottom:32px;}
+  .liga-upcoming-row{grid-template-columns:68px minmax(0,1fr) 18px !important;gap:8px !important;padding:11px 12px !important;}
+  .liga-upcoming-time strong{font-size:14px !important;}
+  .liga-upcoming-teams{font-size:13px !important;}
+  .liga-upcoming-group{display:none !important;}
+  .liga-upcoming-vs{width:23px;height:23px;flex-basis:23px;}
+  .liga-upcoming-arrow{font-size:10px;}
+  .table-responsive{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .liga-table{min-width:650px;}
+  .historical-grid{grid-template-columns:1fr !important;}
+
+  /* Eliminatoria móvil: una ronda debajo de otra, sin scroll horizontal gigante. */
+  .elim-hero{padding:20px 14px 18px !important;margin-left:0;margin-right:0;}
+  .elim-hero .hero-kicker{font-size:.58rem;letter-spacing:1.7px;}
+  .elim-hero h1{font-size:1.85rem !important;letter-spacing:1.2px;}
+  .elim-hero p{font-size:.72rem;}
+  .elim-selector{padding:11px !important;}
+  .bracket-shell{overflow:visible !important;padding:8px !important;border-radius:10px;}
+  .bracket-title{font-size:.9rem;letter-spacing:1.3px;}
+  .bracket-subtitle{font-size:.66rem !important;line-height:1.4;}
+  .bracket-wrap{
+    display:flex !important;flex-direction:column !important;gap:15px !important;
+    min-height:0 !important;padding:5px !important;overflow:visible !important;
+  }
+  .bracket-ronda{
+    display:flex !important;flex-direction:column !important;justify-content:flex-start !important;
+    min-width:0 !important;width:100% !important;min-height:0 !important;height:auto !important;
+    gap:9px !important;padding:0 !important;
+  }
+  .bracket-ronda h6{font-size:.82rem !important;margin:4px 0 2px !important;}
+  .bracket-match{width:100% !important;transform:none !important;}
+  .bracket-ronda-final .bracket-match{transform:none !important;}
+  .bracket-equipo{padding:8px 8px !important;min-height:36px !important;font-size:.73rem !important;}
+  .bracket-equipo span:not(.pts){min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .bracket-meta{font-size:.58rem !important;padding:5px 4px !important;}
+  .bracket-conn-right::after,.bracket-conn-right::before,
+  .bracket-ronda-2 .bracket-match:after,.bracket-ronda-2 .bracket-match:before{display:none !important;content:none !important;}
+  .bracket-ronda-final .bracket-match:before{top:-24px;font-size:.95rem;}
+  .campeon-banner{margin-left:0;margin-right:0;padding:16px 10px !important;}
+  .campeon-banner h3{font-size:1.45rem !important;}
+
+  /* Formularios y filas administrativas/públicas */
+  .form-row>[class*="col-"]{margin-bottom:8px;}
+  .modal-dialog{margin:10px !important;max-width:calc(100% - 20px) !important;}
+}
+
+@media (min-width:768px) and (max-width:991px){
+  .menu-area .navbar{flex-wrap:wrap !important;min-height:70px !important;}
+  .menu-area .navbar .main-nav-wrap{flex:0 0 100% !important;width:100% !important;}
+  .menu-area .navbar .liga-navbar{justify-content:center;gap:12px !important;white-space:normal !important;}
+}

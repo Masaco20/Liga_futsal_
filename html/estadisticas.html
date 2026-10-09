@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Estadísticas | Liga Provincial de Futsal Vaca Diez #1</title>
+<link rel="stylesheet" href="css/fontawesome-all.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/liga.css?v=20261008mobile2">
+<style>
+.stats-hero{background:linear-gradient(135deg,#063b2a,#0f5132);color:#fff;border-radius:18px;padding:32px;margin-bottom:28px}
+.stat-box{background:#fff;border:1px solid #e8ece9;border-radius:14px;padding:20px;height:100%;box-shadow:0 4px 16px rgba(0,0,0,.05)}
+.stat-number{font-size:30px;font-weight:800;color:#0f5132}
+.stat-label{color:#667085;font-size:13px}
+.stats-table th{background:#0f5132;color:#fff}
+.pill{display:inline-block;border-radius:999px;padding:5px 10px;background:#eef7f1;color:#0f5132;font-weight:700;font-size:12px}
+</style>
+</head>
+<body class="gray-bg">
+<section class="menu-area"><div class="container-xl"><nav class="navbar navbar-expand-lg navbar-light bg-light">
+<ul class="mobile-header-buttons"><li><a class="mobile-nav-trigger" href="#" aria-label="Abrir menú"><span></span></a></li></ul>
+<a href="index.html" class="navbar-brand"><img src="img/logo-dark.png" alt="Liga" height="35"></a>
+<div class="main-nav-wrap"><ul class="liga-navbar">
+                                    <li><a href="index.html"><i class="fas fa-home d-inline"></i><span>Inicio</span></a></li>
+                                    <li class="liga-has-dropdown">
+                                        <a href="equipos.html"><i class="fas fa-shield-alt d-inline"></i><span>Equipos</span> <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></a>
+                                        <div class="liga-dropdown">
+                                            <a href="equipos.html"><i class="fas fa-list"></i> Todos los equipos</a>
+                                            <a href="ficha_equipo.html"><i class="fas fa-users"></i> Ficha de equipo</a>
+                                        </div>
+                                    </li>
+                                    <li><a href="calendario.html"><i class="fas fa-calendar-alt d-inline"></i><span>Calendario</span></a></li>
+                                    <li><a href="index.html#tabla-posiciones"><i class="fas fa-list-ol d-inline"></i><span>Tabla</span></a></li>
+                                    <li><a href="estadisticas.html"><i class="fas fa-chart-bar d-inline"></i><span>Estadísticas</span></a></li>
+                                    <li><a href="eliminatoria.html"><i class="fas fa-trophy d-inline"></i><span>Eliminatoria</span></a></li>
+                                </ul></div></nav></div></section>
+
+<main class="container-lg py-5">
+<div class="stats-hero"><div class="row align-items-center"><div class="col-lg-8"><div style="letter-spacing:2px;font-size:12px;font-weight:800;opacity:.8">CENTRO ESTADÍSTICO</div><h1 class="mb-2">Estadísticas del campeonato</h1><p class="mb-0">Información deportiva generada a partir de los partidos, resultados, goles y tarjetas registrados por la Liga.</p></div><div class="col-lg-4 mt-3 mt-lg-0"><select id="camp-select" class="form-control"><option>Cargando campeonatos...</option></select></div></div></div>
+<div id="stats-content"><div class="text-center py-5 text-muted"><i class="fas fa-spinner fa-spin"></i> Cargando estadísticas...</div></div>
+</main>
+
+<script src="js/jquery-3.3.1.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/liga-api.js?v=20261008final"></script>
+<script>
+let ST={camps:[],equipos:[],jugadores:[],partidos:[],resultados:[],goles:[],tarjetas:[],tabla:[]};
+const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+const nomEq=id=>(ST.equipos.find(e=>String(e.id_equipo)===String(id))||{}).nombre||('Equipo #'+id);
+const nomJug=id=>{const j=ST.jugadores.find(x=>String(x.id_jugador)===String(id));return j?`${j.nombre||''} ${j.apellido||''}`.trim():'Jugador #'+id};
+async function cargarTodo(){
+ const [c,e,j,p,r,g,t,tp]=await Promise.all([apiGet('campeonatos'),apiGet('equipos'),apiGet('jugadores'),apiGet('partidos'),apiGet('resultados'),apiGet('detalle_goles'),apiGet('tarjetas'),apiGet('tabla_posiciones')]);
+ ST={camps:c||[],equipos:e||[],jugadores:j||[],partidos:p||[],resultados:r||[],goles:g||[],tarjetas:t||[],tabla:tp||[]};
+ const sel=document.getElementById('camp-select');
+ const activos=ST.camps.filter(c=>String(c.estado).toLowerCase()==='activo');
+ const orden=[...activos,...ST.camps.filter(c=>!activos.includes(c))];
+ sel.innerHTML=orden.map(c=>`<option value="${c.id_campeonato}">${esc(c.nombre||'Campeonato')} ${c.temporada?'· '+esc(c.temporada):''}</option>`).join('');
+ if(orden.length) sel.value=orden[0].id_campeonato;
+ render(); sel.addEventListener('change',render);
+}
+function render(){
+ const id=selVal(); const camp=ST.camps.find(c=>String(c.id_campeonato)===String(id));
+ const ps=ST.partidos.filter(p=>String(p.id_campeonato)===String(id));
+ const ids=new Set(ps.map(p=>String(p.id_partido)));
+ // resultados, goles y tarjetas se vinculan al campeonato por medio de su partido.
+ const rs=ST.resultados.filter(r=>ids.has(String(r.id_partido)));
+ const gs=ST.goles.filter(g=>ids.has(String(g.id_partido)));
+ const ts=ST.tarjetas.filter(t=>ids.has(String(t.id_partido)));
+ const tp=ST.tabla.filter(t=>String(t.id_campeonato)===String(id)).sort((a,b)=>Number(b.puntos||0)-Number(a.puntos||0)||Number(b.diferencia_goles||0)-Number(a.diferencia_goles||0));
+ const jugados=new Set(rs.map(r=>String(r.id_partido)));
+ const pendientes=ps.filter(p=>!jugados.has(String(p.id_partido)));
+ const golesCount={};gs.forEach(g=>golesCount[g.id_jugador]=(golesCount[g.id_jugador]||0)+1);
+ const top=Object.entries(golesCount).sort((a,b)=>b[1]-a[1]).slice(0,8);
+ const amar=ts.filter(t=>String(t.tipo).toLowerCase().includes('amar')).length;
+ const rojas=ts.filter(t=>String(t.tipo).toLowerCase().includes('roja')).length;
+ const totalGoles=gs.length||rs.reduce((a,r)=>a+Number(r.goles_local||0)+Number(r.goles_visitante||0),0);
+ const media=rs.length?(totalGoles/rs.length).toFixed(2):'0.00';
+ const resumen=`${esc(camp?.nombre||'Campeonato')} ${camp?.temporada?'· '+esc(camp.temporada):''}`;
+ let tablaHtml=tp.length?`<div class="table-responsive"><table class="table stats-table"><thead><tr><th>#</th><th>Equipo</th><th>PJ</th><th>PG</th><th>PE</th><th>PP</th><th>GF</th><th>GC</th><th>DG</th><th>Pts</th></tr></thead><tbody>${tp.map((x,i)=>`<tr><td>${i+1}</td><td><strong>${esc(nomEq(x.id_equipo))}</strong></td><td>${x.partidos_jugados||0}</td><td>${x.partidos_ganados||0}</td><td>${x.partidos_empatados||0}</td><td>${x.partidos_perdidos||0}</td><td>${x.goles_favor||0}</td><td>${x.goles_contra||0}</td><td>${x.diferencia_goles||0}</td><td><strong>${x.puntos||0}</strong></td></tr>`).join('')}</tbody></table></div>`:`<div class="alert alert-info">Este campeonato no tiene tabla de posiciones o todavía no se han registrado resultados.</div>`;
+ document.getElementById('stats-content').innerHTML=`
+ <div class="mb-4"><span class="pill"><i class="fas fa-trophy mr-1"></i>${resumen}</span></div>
+ <div class="row mb-4">
+  ${box('fa-shield-alt',new Set(ps.flatMap(p=>[p.id_equipo_local,p.id_equipo_visitante])).size,'Equipos')}
+  ${box('fa-calendar-check',jugados.size,'Partidos jugados')}
+  ${box('fa-calendar-alt',pendientes.length,'Pendientes')}
+  ${box('fa-futbol',totalGoles,'Goles')}
+  ${box('fa-bullseye',media,'Goles por partido')}
+  ${box('fa-square',ts.length,`Tarjetas (${amar} A · ${rojas} R)`)}
+ </div>
+ <div class="row"><div class="col-lg-8 mb-4"><div class="stat-box"><h3 class="mb-3">Tabla de posiciones</h3>${tablaHtml}</div></div>
+ <div class="col-lg-4 mb-4"><div class="stat-box"><h3 class="mb-3">Top goleadores</h3>${top.length?top.map((x,i)=>`<div class="d-flex justify-content-between border-bottom py-2"><span><strong>${i+1}.</strong> ${esc(nomJug(x[0]))}</span><strong>${x[1]}</strong></div>`).join(''):'<p class="text-muted">Aún no hay goles detallados.</p>'}</div></div></div>
+ <div class="stat-box mb-4"><h3 class="mb-3">Próximos partidos</h3>${pendientes.slice().sort((a,b)=>String(a.fecha||'').localeCompare(String(b.fecha||''))).slice(0,8).map(p=>`<div class="d-flex justify-content-between flex-wrap border-bottom py-2"><span><strong>${esc(nomEq(p.id_equipo_local))}</strong> vs <strong>${esc(nomEq(p.id_equipo_visitante))}</strong></span><span>${esc(p.fecha||'')} · ${esc(p.hora||'')} · J${esc(p.jornada||'-')}</span></div>`).join('')||'<p class="text-muted mb-0">No hay partidos pendientes registrados.</p>'}</div>
+ `;
+}
+function selVal(){return document.getElementById('camp-select').value}
+function box(icon,value,label){return `<div class="col-xl-2 col-lg-4 col-6 mb-3"><div class="stat-box"><i class="fas ${icon} text-success mb-2"></i><div class="stat-number">${value}</div><div class="stat-label">${label}</div></div></div>`}
+cargarTodo().catch(e=>{console.error(e);document.getElementById('stats-content').innerHTML='<div class="alert alert-danger">No se pudieron cargar las estadísticas. Verifica la conexión con la API.</div>'});
+</script>
+<script>
+(function(){
+  document.querySelectorAll('.liga-more-trigger').forEach(function(trigger){
+    trigger.addEventListener('click',function(event){
+      event.preventDefault();
+      var menu=trigger.closest('.liga-more-menu');
+      if(menu) menu.classList.toggle('is-open');
+    });
+  });
+})();
+</script>
+<script src="js/liga-mobile.js?v=20261008mobile"></script>
+</body>
+</html>

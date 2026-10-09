@@ -1,0 +1,261 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Calendario | Liga Provincial de Futsal Vaca Diez #1</title>
+        <meta
+            http-equiv="Content-Type"
+            content="text/html; charset=UTF-8"
+        >
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        >
+
+        <!-- <base href="views/"> -->
+
+        <link name="favicon" type="image/x-icon" href="img/icons/favicon.png" rel="shortcut icon">
+        <link rel="favicon" href="img/icons/favicon.ico">
+        <link rel="apple-touch-icon" href="default/img/icons/icon.png">
+        <link rel="stylesheet" href="css/jquery.webui-popover.min.css">
+        <link rel="stylesheet" href="css/select2.min.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/slick-theme.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:600,700,800" rel="stylesheet">
+        <link rel="stylesheet" href="css/liga.css?v=20261008mobile2">
+        <!-- <link href="css" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/toastr.css">
+        <link rel="stylesheet" href="css/jquery.nestable.min.css">
+        <script src="js/jquery-3.3.1.min.js"></script>
+
+    </head>
+
+    <body
+        class="gray-bg"
+        cz-shortcut-listen="true"
+    >
+
+        <!-- =====================================
+        Menú
+        ====================================== -->
+
+        <section class="menu-area">
+
+            <div class="container-xl">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                            <!-- =====================================
+                            Menú Mobile
+                            ====================================== -->
+
+                            <ul class="mobile-header-buttons">
+                                <li>
+                                    <a
+                                        class="mobile-nav-trigger"
+                                        href="#"
+                                    >
+                                        Menu
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="mobile-search-trigger"
+                                        href="#"
+                                    >
+                                        Search
+                                        <span></span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <a
+                                href="index.html"
+                                class="navbar-brand"
+                            >
+                                <img
+                                    src="img/logo-dark.png"
+                                    alt
+                                    height="35"
+                                >
+                            </a>
+
+                            <div class="main-nav-wrap">
+
+                                <ul class="liga-navbar">
+                                    <li><a href="index.html"><i class="fas fa-home d-inline"></i><span>Inicio</span></a></li>
+                                    <li class="liga-has-dropdown">
+                                        <a href="equipos.html"><i class="fas fa-shield-alt d-inline"></i><span>Equipos</span> <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></a>
+                                        <div class="liga-dropdown">
+                                            <a href="equipos.html"><i class="fas fa-list"></i> Todos los equipos</a>
+                                            <a href="ficha_equipo.html"><i class="fas fa-users"></i> Ficha de equipo</a>
+                                        </div>
+                                    </li>
+                                    <li><a href="calendario.html"><i class="fas fa-calendar-alt d-inline"></i><span>Calendario</span></a></li>
+                                    <li><a href="index.html#tabla-posiciones"><i class="fas fa-list-ol d-inline"></i><span>Tabla</span></a></li>
+                                    <li><a href="estadisticas.html"><i class="fas fa-chart-bar d-inline"></i><span>Estadísticas</span></a></li>
+                                    <li><a href="eliminatoria.html"><i class="fas fa-trophy d-inline"></i><span>Eliminatoria</span></a></li>
+                                </ul>
+
+                            </div>
+
+                            <!-- =====================================
+                            Buscador
+                            ====================================== -->
+
+                            <form
+                                class="inline-form"
+                                style="width: 100%;"
+                            >
+                                <div class="input-group search-box mobile-search">
+                                    <input
+                                        type="text"
+                                        name="query"
+                                        class="form-control"
+                                        placeholder="Buscar equipo o partido"
+                                    >
+                                    <div class="input-group-append">
+                                        <button
+                                            class="btn"
+                                            type="submit"
+                                        >
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <span class="signin-box-move-desktop-helper"></span>
+
+                            <!-- =====================================
+                            Login and Register
+                            ====================================== -->
+
+                            <div class="sign-in-box btn-group" id="liga-sesion-box">
+
+                                <a
+                                    href="login.html"
+                                    class="btn btn-sign-in"
+                                    style="margin-right:8px;"
+                                >
+                                    Iniciar sesión
+                                </a>
+
+                                <a
+                                    href="login.html"
+                                    class="btn btn-sign-in"
+                                >
+                                    Administrador
+                                </a>
+
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <section class="liga-section" style="padding-top:40px;">
+            <div class="container-lg">
+                <h2 class="liga-section-title">Calendario de Partidos</h2>
+                <div class="row align-items-end mb-3">
+                    <div class="col-md-6">
+                        <label class="small font-weight-bold mb-1">Campeonato / temporada</label>
+                        <select id="cal-filtro-campeonato" class="form-control"></select>
+                    </div>
+                    <div class="col-md-3 mt-2 mt-md-0">
+                        <label class="small font-weight-bold mb-1">Jornada</label>
+                        <select id="cal-filtro-jornada" class="form-control"><option value="">Todas las jornadas</option></select>
+                    </div>
+                </div>
+                <div id="calendario-lista">
+                    <div class="text-center text-muted py-5">Cargando calendario...</div>
+                </div>
+            </div>
+        </section>
+
+<footer class="liga-footer">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h5>Liga Provincial de Futsal</h5>
+                        <p>Riberalta, Beni &mdash; Bolivia</p>
+                    </div>
+                    <div class="col-md-6 mb-3 text-md-right liga-social">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="#"><i class="fas fa-envelope"></i> Correo</a>
+                    </div>
+                </div>
+                <div class="liga-copyright text-center">
+                    &copy; 2026 Liga Provincial de Futsal Vaca Diez #1 &mdash; Riberalta
+                </div>
+            </div>
+        </footer>
+
+        <script>
+        (async function(){
+            const API_BASE_URL = "../api/index.php";
+            const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+            const get=async tabla=>{const r=await fetch(`${API_BASE_URL}?table=${tabla}`,{cache:'no-store'});const d=await r.json();return Array.isArray(d.results)?d.results:[];};
+            const estados={Programado:'<span class="badge badge-secondary">Programado</span>',Finalizado:'<span class="badge badge-success">Finalizado</span>',Jugado:'<span class="badge badge-success">Finalizado</span>',Suspendido:'<span class="badge badge-danger">Suspendido</span>'};
+            try{
+                const [partidos,equipos,campeonatos]=await Promise.all([get('partidos'),get('equipos'),get('campeonatos')]);
+                const mapa={};equipos.forEach(e=>mapa[e.id_equipo]=e.nombre);
+                const selC=document.getElementById('cal-filtro-campeonato'),selJ=document.getElementById('cal-filtro-jornada'),cont=document.getElementById('calendario-lista');
+                const ordenC=campeonatos.slice().sort((a,b)=>Number(b.id_campeonato)-Number(a.id_campeonato));
+                selC.innerHTML=ordenC.map(c=>`<option value="${c.id_campeonato}">${esc(c.nombre)}${c.temporada?' · '+esc(c.temporada):''}${c.estado==='Activo'?' · Activo':''}</option>`).join('');
+                const activo=ordenC.find(c=>String(c.estado).toLowerCase()==='activo')||ordenC[0]; if(activo) selC.value=activo.id_campeonato;
+                function render(){
+                    const id=selC.value;
+                    let lista=partidos.filter(p=>String(p.id_campeonato)===String(id));
+                    const jornadas=[...new Set(lista.map(p=>String(p.jornada??'S/J')))];
+                    selJ.innerHTML='<option value="">Todas las jornadas</option>'+jornadas.sort((a,b)=>(Number(a)||9999)-(Number(b)||9999)).map(j=>`<option value="${esc(j)}">Jornada ${esc(j)}</option>`).join('');
+                    if(!lista.length){cont.innerHTML='<div class="text-center text-muted py-5">Este campeonato todavía no tiene partidos registrados.</div>';return;}
+                    const fj=selJ.value; if(fj) lista=lista.filter(p=>String(p.jornada??'S/J')===String(fj));
+                    const por={};lista.forEach(p=>(por[p.jornada??'S/J']??=[]).push(p));
+                    let html='';
+                    Object.keys(por).sort((a,b)=>(Number(a)||9999)-(Number(b)||9999)).forEach(j=>{
+                        const items=por[j].slice().sort((a,b)=>`${a.fecha||''} ${a.hora||''}`.localeCompare(`${b.fecha||''} ${b.hora||''}`));
+                        html+=`<div class="mb-4"><div class="d-flex justify-content-between align-items-center mb-2"><h5 class="mb-0" style="color:#073d23;font-weight:800;">Jornada ${esc(j)}</h5><span class="small text-muted">${items.length} partido(s)</span></div><div class="liga-table-wrap table-responsive"><table class="table liga-table align-middle mb-0"><thead><tr><th>Fecha</th><th>Hora</th><th class="text-left">Local</th><th></th><th class="text-left">Visitante</th><th>Estado</th><th></th></tr></thead><tbody>`;
+                        items.forEach(p=>{html+=`<tr><td>${esc(p.fecha||'')}</td><td>${esc(p.hora||'')}</td><td class="text-left">${esc(mapa[p.id_equipo_local]||'Equipo #'+p.id_equipo_local)}</td><td>vs</td><td class="text-left">${esc(mapa[p.id_equipo_visitante]||'Equipo #'+p.id_equipo_visitante)}</td><td>${estados[p.estado]||esc(p.estado||'')}</td><td><a class="btn btn-sm btn-outline-success" href="partido.html?id=${encodeURIComponent(p.id_partido)}">Ver partido</a></td></tr>`;});
+                        html+='</tbody></table></div></div>';
+                    });
+                    cont.innerHTML=html||'<div class="text-center text-muted py-5">No hay partidos para la jornada seleccionada.</div>';
+                }
+                selC.addEventListener('change',()=>{selJ.value='';render();});selJ.addEventListener('change',render);render();
+            }catch(e){console.error(e);document.getElementById('calendario-lista').innerHTML='<div class="alert alert-warning">No se pudo cargar el calendario. Verifica la conexión con la API.</div>';}
+        })();
+        </script>
+
+        <script src="js/auth.js"></script>
+        <script src="js/header-session.js"></script>
+    <script>
+(function(){
+  document.querySelectorAll('.liga-more-trigger').forEach(function(trigger){
+    trigger.addEventListener('click',function(event){
+      event.preventDefault();
+      var menu=trigger.closest('.liga-more-menu');
+      if(menu) menu.classList.toggle('is-open');
+    });
+  });
+})();
+</script>
+<script src="js/liga-mobile.js?v=20261008mobile"></script>
+</body>
+</html>

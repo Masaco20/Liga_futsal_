@@ -1,0 +1,553 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Liga Provincial de Futsal Vaca Diez #1 | Primera &quot;A&quot; - Riberalta</title>
+        <meta
+            http-equiv="Content-Type"
+            content="text/html; charset=UTF-8"
+        >
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        >
+
+        <!-- <base href="views/"> -->
+
+        <link name="favicon" type="image/x-icon" href="img/icons/favicon.png" rel="shortcut icon">
+        <link rel="favicon" href="img/icons/favicon.ico">
+        <link rel="apple-touch-icon" href="default/img/icons/icon.png">
+        <link rel="stylesheet" href="css/jquery.webui-popover.min.css">
+        <link rel="stylesheet" href="css/select2.min.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/slick-theme.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:600,700,800" rel="stylesheet">
+        <link rel="stylesheet" href="css/liga.css?v=20261008mobile2">
+        <!-- <link href="css" rel="stylesheet"> -->
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/toastr.css">
+        <link rel="stylesheet" href="css/jquery.nestable.min.css">
+        <script src="js/jquery-3.3.1.min.js"></script>
+
+    
+        <style>
+            .liga-champion-card{max-width:760px;margin:0 auto 10px;padding:28px 24px;text-align:center;background:linear-gradient(135deg,#064e3b,#0f5132);color:#fff;border-radius:16px;box-shadow:0 8px 24px rgba(0,0,0,.12)}
+            .liga-champion-trophy{font-size:42px;line-height:1;margin-bottom:8px}
+            .liga-champion-label{font-size:13px;letter-spacing:2px;font-weight:800;opacity:.9}
+            .liga-champion-name{font-size:32px;font-weight:800;margin:6px 0 10px}
+            .liga-champion-final{font-size:15px;opacity:.95;line-height:1.6}
+            .liga-champion-empty{max-width:760px;margin:0 auto;padding:18px;text-align:center;background:#fff;border-radius:12px;border:1px solid #e6e9e7;color:#667085}
+            .liga-champion-running{background:linear-gradient(135deg,#075985,#0f766e)}
+            @media(max-width:576px){.liga-champion-name{font-size:25px}}
+        
+            .liga-fan-section{background:linear-gradient(180deg,#f7faf8 0%,#eef6f1 100%)}
+            .liga-fan-head{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap}
+            .liga-fan-select-wrap{min-width:260px;background:#fff;padding:14px 16px;border-radius:14px;border:1px solid #dfe9e2;box-shadow:0 5px 18px rgba(0,0,0,.04)}
+            .liga-fan-card{background:#fff;border:1px solid #dfe9e2;border-radius:18px;box-shadow:0 8px 25px rgba(0,0,0,.06);overflow:hidden}
+            .liga-fan-card-head{padding:22px 24px;background:linear-gradient(135deg,#063b2a,#0f5132);color:#fff}
+            .liga-fan-team{font-size:30px;font-weight:800;line-height:1.05;margin:2px 0 4px}
+            .liga-fan-mini{font-size:13px;opacity:.85}
+            .liga-fan-body{padding:20px 22px}
+            .liga-fan-match{height:100%;border:1px solid #e8ece9;border-radius:14px;padding:18px;background:#fff}
+            .liga-fan-match-label{font-size:11px;text-transform:uppercase;letter-spacing:1.2px;font-weight:800;color:#0f5132;margin-bottom:9px}
+            .liga-fan-opponent{font-size:20px;font-weight:800;color:#182230}
+            .liga-fan-score{font-size:28px;font-weight:900;color:#0f5132;margin:8px 0}
+            .liga-form{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+            .liga-form-badge{width:32px;height:32px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-weight:900;font-size:12px;background:#edf2ef;color:#59636e;text-decoration:none}.liga-form-badge:hover{transform:translateY(-1px);text-decoration:none}.liga-fan-history-row{display:grid;grid-template-columns:110px 1fr 70px 90px 20px;gap:10px;align-items:center;padding:10px 12px;margin-bottom:7px;border:1px solid #e7ece9;border-radius:10px;background:#fff;color:#1d2a23;text-decoration:none}.liga-fan-history-row:hover{text-decoration:none;background:#f7faf8}.liga-fan-history-row.win{border-left:4px solid #25a35a}.liga-fan-history-row.draw{border-left:4px solid #d4a72c}.liga-fan-history-row.loss{border-left:4px solid #d9534f}.liga-fan-history-state{font-size:11px;font-weight:800}.liga-fan-history-row.win .liga-fan-history-state{color:#16833a}.liga-fan-history-row.draw .liga-fan-history-state{color:#946d00}.liga-fan-history-row.loss .liga-fan-history-state{color:#b42318}@media(max-width:700px){.liga-fan-history-row{grid-template-columns:1fr auto auto;}.liga-fan-history-date,.liga-fan-history-rival{grid-column:span 1}.liga-fan-history-state{display:none}}
+            .liga-form-badge.win{background:#d9f4e2;color:#137333}.liga-form-badge.draw{background:#fff2cf;color:#8a6500}.liga-form-badge.loss{background:#fde0e0;color:#b42318}
+            .liga-fan-empty{background:#fff;border:1px dashed #cbd9d0;border-radius:16px;padding:28px;text-align:center;color:#667085}
+            .liga-fan-empty-icon{font-size:38px;margin-bottom:8px}
+            .liga-fan-link{font-weight:700;color:#0f5132;text-decoration:none}.liga-fan-link:hover{text-decoration:underline}
+            @media(max-width:700px){.liga-fan-select-wrap{width:100%;min-width:0}.liga-fan-team{font-size:25px}}
+        </style>
+
+</head>
+
+    <body
+        class="gray-bg"
+        cz-shortcut-listen="true"
+    >
+
+        <!-- =====================================
+        Menú
+        ====================================== -->
+
+        <section class="menu-area">
+
+            <div class="container-xl">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                            <!-- =====================================
+                            Menú Mobile
+                            ====================================== -->
+
+                            <ul class="mobile-header-buttons">
+                                <li>
+                                    <a
+                                        class="mobile-nav-trigger"
+                                        href="#"
+                                    >
+                                        Menu
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="mobile-search-trigger"
+                                        href="#"
+                                    >
+                                        Search
+                                        <span></span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <a
+                                href="index.html"
+                                class="navbar-brand"
+                            >
+                                <img
+                                    src="img/logo-dark.png"
+                                    alt
+                                    height="35"
+                                >
+                            </a>
+
+                            <div class="main-nav-wrap">
+
+                                <ul class="liga-navbar">
+                                    <li><a href="index.html"><i class="fas fa-home d-inline"></i><span>Inicio</span></a></li>
+                                    <li class="liga-has-dropdown">
+                                        <a href="equipos.html"><i class="fas fa-shield-alt d-inline"></i><span>Equipos</span> <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></a>
+                                        <div class="liga-dropdown">
+                                            <a href="equipos.html"><i class="fas fa-list"></i> Todos los equipos</a>
+                                            <a href="ficha_equipo.html"><i class="fas fa-users"></i> Ficha de equipo</a>
+                                        </div>
+                                    </li>
+                                    <li><a href="calendario.html"><i class="fas fa-calendar-alt d-inline"></i><span>Calendario</span></a></li>
+                                    <li><a href="index.html#tabla-posiciones"><i class="fas fa-list-ol d-inline"></i><span>Tabla</span></a></li>
+                                    <li><a href="estadisticas.html"><i class="fas fa-chart-bar d-inline"></i><span>Estadísticas</span></a></li>
+                                    <li><a href="eliminatoria.html"><i class="fas fa-trophy d-inline"></i><span>Eliminatoria</span></a></li>
+                                </ul>
+
+                            </div>
+
+                            <!-- =====================================
+                            Buscador
+                            ====================================== -->
+
+                            <form
+                                class="inline-form"
+                                style="width: 100%;"
+                            >
+                                <div class="input-group search-box mobile-search">
+                                    <input
+                                        type="text"
+                                        name="query"
+                                        class="form-control"
+                                        placeholder="Buscar equipo o partido"
+                                    >
+                                    <div class="input-group-append">
+                                        <button
+                                            class="btn"
+                                            type="submit"
+                                        >
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <span class="signin-box-move-desktop-helper"></span>
+
+                            <!-- =====================================
+                            Login and Register
+                            ====================================== -->
+
+                            <div class="sign-in-box btn-group" id="liga-sesion-box">
+
+                                <a
+                                    href="login.html"
+                                    class="btn btn-sign-in"
+                                    style="margin-right:8px;"
+                                >
+                                    Iniciar sesión
+                                </a>
+
+                                <a
+                                    href="login.html"
+                                    class="btn btn-sign-in"
+                                >
+                                    Administrador
+                                </a>
+
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+        <!-- =====================================
+        Home - Learn on your schedule
+        ====================================== -->
+
+        <!-- =====================================
+        Banner principal
+        ====================================== -->
+
+        <section class="liga-hero">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-lg-7">
+                        <div class="liga-hero-eyebrow">TEMPORADA 2026</div>
+                        <h1>
+                            <span>LIGA PROVINCIAL DE FUTSAL</span>
+                            <span>PRIMERA "A"</span>
+                            <span>RIBERALTA</span>
+                        </h1>
+                        <p>Toda la información del campeonato: resultados en vivo, calendario de partidos y tabla de posiciones, actualizados por la Liga Provincial de Futsal Vaca Diez #1.</p>
+                        <a href="calendario.html" class="btn-liga-cta">Ver Calendario</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Modo hincha
+        ====================================== -->
+        <section class="liga-section liga-fan-section" id="modo-hincha">
+            <div class="container-lg">
+                <div class="liga-fan-head">
+                    <div>
+                        <div class="liga-hero-eyebrow" style="margin-bottom:6px;">MODO HINCHA</div>
+                        <h2 class="liga-section-title mb-1">Sigue a tu equipo</h2>
+                        <p class="text-muted mb-0">Elige un equipo y consulta rápidamente su próximo partido, último resultado y forma reciente.</p>
+                    </div>
+                    <div class="liga-fan-select-wrap">
+                        <label for="hincha-equipo" class="small font-weight-bold mb-1">Mi equipo</label>
+                        <select id="hincha-equipo" class="form-control">
+                            <option value="">Selecciona tu equipo...</option>
+                        </select>
+                    </div>
+                </div>
+                <div id="modo-hincha-content" class="mt-4">
+                    <div class="liga-fan-empty">
+                        <div class="liga-fan-empty-icon">📣</div>
+                        <h4>Elige tu equipo</h4>
+                        <p class="mb-0">La selección queda guardada en este dispositivo para que el hincha pueda volver a consultar su equipo.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Tarjetas resumen
+        ====================================== -->
+
+        <section class="liga-section">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="liga-stat-card">
+                            <div class="liga-stat-icon">⚽</div>
+                            <h3 id="stat-equipos">12</h3>
+                            <p>Equipos participantes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="liga-stat-card">
+                            <div class="liga-stat-icon">📅</div>
+                            <h3 id="stat-proxima-fecha">Sábado 18:30</h3>
+                            <p>Próxima fecha</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="liga-stat-card">
+                            <div class="liga-stat-icon">🏆</div>
+                            <h3><a href="#tabla-posiciones">Ver posiciones</a></h3>
+                            <p>Tabla</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 mb-4">
+                        <div class="liga-stat-card">
+                            <div class="liga-stat-icon">📰</div>
+                            <h3><a href="noticias.html">Últimas novedades</a></h3>
+                            <p>Noticias</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Próxima Fecha
+        ====================================== -->
+
+        <section class="liga-section bg-gray liga-upcoming-section">
+            <div class="container-lg">
+                <div class="liga-upcoming-heading">
+                    <div>
+                        <div class="liga-upcoming-kicker">CALENDARIO</div>
+                        <h2 class="liga-section-title mb-1">Próxima fecha</h2>
+                        <p class="liga-upcoming-subtitle" id="proxima-fecha-subtitulo">Partidos de la siguiente jornada del campeonato activo.</p>
+                    </div>
+                    <a href="calendario.html" class="liga-upcoming-all">Ver calendario completo <i class="fas fa-arrow-right"></i></a>
+                </div>
+                <div id="proximos-partidos" class="liga-upcoming-list">
+                    <div class="liga-upcoming-placeholder">Cargando próximos partidos...</div>
+                </div>
+                <p class="liga-programados" id="partidos-programados-count"></p>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Tabla de Posiciones y Goleadores
+        ====================================== -->
+
+        <!-- =====================================
+        Campeón / Eliminatoria
+        ====================================== -->
+        <section class="liga-section" id="campeon-actual">
+            <div class="container-lg">
+                <h2 class="liga-section-title">Campeonato</h2>
+                <div id="campeon-panel">
+                    <div class="liga-champion-empty">Cargando estado del campeonato...</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="liga-section" id="tabla-posiciones">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-lg-8 mb-4">
+                        <h2 class="liga-section-title">Tabla de Posiciones</h2>
+                        <div class="liga-table-wrap table-responsive">
+                            <table class="table liga-table text-center align-middle mb-0">
+                                <thead>
+                                    <tr>
+                                        <th>Pos</th>
+                                        <th class="text-left">Equipo</th>
+                                        <th>PJ</th><th>PG</th><th>PE</th><th>PP</th>
+                                        <th>GF</th><th>GC</th><th>Pts</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="tabla-posiciones-body">
+                                    <tr>
+                                        <td>1</td><td class="text-left">Universitario</td>
+                                        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>0</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>2</td><td class="text-left">Deportivo Riberalta</td>
+                                        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>0</strong></td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td><td class="text-left">Real Kachorros</td>
+                                        <td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td><td><strong>0</strong></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="col-lg-4 mb-4">
+                        <h2 class="liga-section-title">Goleadores</h2>
+                        <div class="liga-scorers">
+                            <h4>Top Goleadores</h4>
+                            <div id="top-goleadores">
+                                <div class="liga-scorer-item">
+                                    <span class="liga-scorer-name">⚽ Juan Pérez</span>
+                                    <span class="liga-scorer-goals">15</span>
+                                </div>
+                                <div class="liga-scorer-item">
+                                    <span class="liga-scorer-name">⚽ Luis García</span>
+                                    <span class="liga-scorer-goals">13</span>
+                                </div>
+                                <div class="liga-scorer-item">
+                                    <span class="liga-scorer-name">⚽ Carlos Suárez</span>
+                                    <span class="liga-scorer-goals">10</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Equipos de Primera A
+        ====================================== -->
+
+        <section class="liga-section bg-gray">
+            <div class="container-lg">
+                <h2 class="liga-section-title">Equipos de Primera "A"</h2>
+                <div class="row" id="equipos-grid">
+                    <div class="col-md-3 col-6 text-center mb-4 equipo-placeholder">
+                        <div class="liga-stat-card">
+                            <div class="liga-crest">RK</div>
+                            <strong>Real Kachorros</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 text-center mb-4 equipo-placeholder">
+                        <div class="liga-stat-card">
+                            <div class="liga-crest">UN</div>
+                            <strong>Universitario</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 text-center mb-4 equipo-placeholder">
+                        <div class="liga-stat-card">
+                            <div class="liga-crest">DR</div>
+                            <strong>Deportivo Riberalta</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6 text-center mb-4 equipo-placeholder">
+                        <div class="liga-stat-card">
+                            <div class="liga-crest">AF</div>
+                            <strong>Amazonía Futsal</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Noticias
+        ====================================== -->
+
+        <section class="liga-section">
+            <div class="container-lg">
+                <h2 class="liga-section-title">Noticias</h2>
+                <div class="row" id="noticias-grid">
+                    <div class="col-md-4 noticia-placeholder">
+                        <div class="liga-news-card">
+                            <img src="img/liga-hero-placeholder.jpg" alt="Noticia">
+                            <div class="liga-news-body">
+                                <h5>Título de la noticia</h5>
+                                <a href="noticias.html" class="liga-read-more">Leer más &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- =====================================
+        Footer
+        ====================================== -->
+
+        <footer class="liga-footer">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h5>Liga Provincial de Futsal</h5>
+                        <p>Riberalta, Beni &mdash; Bolivia</p>
+                    </div>
+                    <div class="col-md-6 mb-3 text-md-right liga-social">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="#"><i class="fas fa-envelope"></i> Correo</a>
+                    </div>
+                </div>
+                <div class="liga-copyright text-center">
+                    &copy; 2026 Liga Provincial de Futsal Vaca Diez #1 &mdash; Riberalta
+                </div>
+            </div>
+        </footer>
+
+        <!--=====================================
+        Scripts
+        ======================================-->
+
+        <script src="js/vendor/modernizr-3.5.0.min.js"></script>
+        <script src="js/vendor/jquery-3.2.1.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/slick.min.js"></script>
+        <script src="js/select2.min.js"></script>
+        <script src="js/tinymce.min.js"></script>
+        <script src="js/multi-step-modal.js"></script>
+        <script src="js/jquery.webui-popover.min.js"></script>
+        <script src="js/O7BMTay5.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/toastr.min.js"></script>
+        <script
+            src="js/jquery.nestable.min.js"
+            charset="utf-8"
+        ></script>
+        <script
+            src="js/jquery.form.min.js"
+            integrity="sha384-FzT3vTVGXqf7wRfy8k4BiyzvbNfeYjK+frTVqZeNDFl8woCbF0CYG6g2fMEFFo/i"
+            crossorigin="anonymous"
+        ></script>
+        <script src="js/bootstrap-tagsinput.min.js"></script>
+        <script src="js/custom.js"></script>
+        <script src="js/auth.js"></script>
+        <script src="js/header-session.js"></script>
+        <script src="js/liga-api.js?v=20261008final"></script>
+        <script>
+/* Modo hincha: selección local, sin crear datos nuevos en la base. */
+(function(){
+    const KEY='liga_hincha_equipo';
+    const escFan=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    const fmtDate=s=>{ if(!s) return 'Fecha por confirmar'; const d=new Date(String(s).length<=10?s+'T12:00:00':s); return isNaN(d)?String(s):d.toLocaleDateString('es-BO',{weekday:'short',day:'2-digit',month:'short'}); };
+    const ts=p=>{ const d=String(p?.fecha||''); const h=String(p?.hora||'00:00'); const x=new Date((d.length<=10?d+'T':d)+h); return isNaN(x)?Number.MAX_SAFE_INTEGER:x.getTime(); };
+    const resultadoPara=(p,resultados)=>resultados.find(r=>String(r.id_partido)===String(p.id_partido));
+    function render(){
+        const sel=document.getElementById('hincha-equipo'), box=document.getElementById('modo-hincha-content');
+        if(!sel||!box||!window.HINCHA_DATA)return;
+        const id=sel.value;
+        if(!id){ box.innerHTML='<div class="liga-fan-empty"><div class="liga-fan-empty-icon">📣</div><h4>Elige tu equipo</h4><p class="mb-0">Consulta su próximo partido, último resultado y forma reciente.</p></div>'; return; }
+        localStorage.setItem(KEY,id);
+        const {equipos,partidos,resultados,campeonato}=window.HINCHA_DATA;
+        const eq=equipos.find(e=>String(e.id_equipo)===String(id));
+        const ps=partidos.filter(p=>String(p.id_campeonato)===String(campeonato?.id_campeonato) && (String(p.id_equipo_local)===String(id)||String(p.id_equipo_visitante)===String(id))).sort((a,b)=>ts(a)-ts(b));
+        const jugados=ps.filter(p=>resultadoPara(p,resultados));
+        const pendientes=ps.filter(p=>!resultadoPara(p,resultados));
+        const ultimo=jugados.slice().sort((a,b)=>ts(b)-ts(a))[0];
+        const proximo=pendientes.slice().sort((a,b)=>ts(a)-ts(b))[0];
+        const ultimos=jugados.slice().sort((a,b)=>ts(b)-ts(a)).slice(0,5);
+        const mapa={}; equipos.forEach(e=>mapa[e.id_equipo]=e.nombre);
+        function matchCard(p,label){
+            if(!p)return `<div class="liga-fan-match"><div class="liga-fan-match-label">${label}</div><div class="text-muted">No hay partido registrado.</div></div>`;
+            const local=String(p.id_equipo_local)===String(id), rival=mapa[local?p.id_equipo_visitante:p.id_equipo_local]||'Rival';
+            const r=resultadoPara(p,resultados);
+            return `<div class="liga-fan-match"><div class="liga-fan-match-label">${label}</div><div class="small text-muted mb-1">${fmtDate(p.fecha)} · ${escFan(p.hora||'Hora por confirmar')} · Jornada ${escFan(p.jornada||'-')}</div><div class="liga-fan-opponent">${local?'vs':'@'} ${escFan(rival)}</div>${r?`<div class="liga-fan-score">${local?r.goles_local:r.goles_visitante} - ${local?r.goles_visitante:r.goles_local}</div><div class="small text-muted">Resultado registrado</div>`:`<div class="mt-2"><span class="badge badge-success">Próximo partido</span></div>`}<div class="mt-3"><a class="liga-fan-link" href="partido.html?id=${encodeURIComponent(p.id_partido)}">Ver detalle del partido →</a></div></div>`;
+        }
+        const forma=ultimos.length?ultimos.map(p=>{const r=resultadoPara(p,resultados), local=String(p.id_equipo_local)===String(id), gf=Number(local?r.goles_local:r.goles_visitante), gc=Number(local?r.goles_visitante:r.goles_local); return `<a class="liga-form-badge ${gf>gc?'win':gf===gc?'draw':'loss'}" title="${fmtDate(p.fecha)} · ${mapa[local?p.id_equipo_visitante:p.id_equipo_local]||'Rival'}" href="partido.html?id=${encodeURIComponent(p.id_partido)}">${gf>gc?'G':gf===gc?'E':'P'}</a>`;}).join(''):'<span class="text-muted small">Sin resultados suficientes</span>';
+        const historial=ultimos.length?`<div class="liga-fan-history mt-4"><div class="d-flex justify-content-between align-items-center mb-2"><strong>Partidos anteriores</strong><span class="small text-muted">Toca un partido para ver el resultado</span></div>${ultimos.map(p=>{const r=resultadoPara(p,resultados),local=String(p.id_equipo_local)===String(id),rival=mapa[local?p.id_equipo_visitante:p.id_equipo_local]||'Rival',gf=local?r.goles_local:r.goles_visitante,gc=local?r.goles_visitante:r.goles_local,cls=gf>gc?'win':gf===gc?'draw':'loss';return `<a class="liga-fan-history-row ${cls}" href="partido.html?id=${encodeURIComponent(p.id_partido)}"><span class="liga-fan-history-date">${fmtDate(p.fecha)}</span><span class="liga-fan-history-rival">${local?'vs':'@'} ${escFan(rival)}</span><strong>${gf} - ${gc}</strong><span class="liga-fan-history-state">${gf>gc?'GANADO':gf===gc?'EMPATE':'PERDIDO'}</span><span>→</span></a>`;}).join('')}</div>`:'';
+        box.innerHTML=`<div class="liga-fan-card"><div class="liga-fan-card-head"><div class="liga-fan-mini">MI EQUIPO</div><div class="liga-fan-team">${escFan(eq?.nombre||'Equipo')}</div><div class="liga-fan-mini">${campeonato?.nombre?escFan(campeonato.nombre)+' · '+escFan(campeonato.temporada||''):''}</div><div class="liga-fan-mini">${eq?.grupo?'Grupo '+escFan(eq.grupo)+' · ':''} ${ps.length} partido(s) registrado(s)</div></div><div class="liga-fan-body"><div class="row"><div class="col-lg-6 mb-3">${matchCard(proximo,'Próximo partido')}</div><div class="col-lg-6 mb-3">${matchCard(ultimo,'Último resultado')}</div></div><div class="border-top pt-3"><div class="d-flex justify-content-between align-items-center flex-wrap"><div><strong>Forma reciente</strong><div class="small text-muted">G = ganado · E = empatado · P = perdido · puedes entrar a cada partido</div></div><div class="liga-form">${forma}</div></div>${historial}</div></div></div>`;
+    }
+    document.addEventListener('DOMContentLoaded',async()=>{
+        const sel=document.getElementById('hincha-equipo'); if(!sel)return;
+        try{
+            const [equipos,partidos,resultados,campeonatos]=await Promise.all([apiGet('equipos','?orderBy=nombre&orderMode=ASC'),apiGet('partidos'),apiGet('resultados'),apiGet('campeonatos')]);
+            const ordenC=(campeonatos||[]).slice().sort((a,b)=>Number(b.id_campeonato)-Number(a.id_campeonato));
+            const campeonato=ordenC.find(c=>String(c.estado||'').toLowerCase()==='activo')||ordenC[0]||null;
+            window.HINCHA_DATA={equipos:equipos||[],partidos:partidos||[],resultados:resultados||[],campeonato};
+            sel.innerHTML='<option value="">Selecciona tu equipo...</option>'+window.HINCHA_DATA.equipos.map(e=>`<option value="${e.id_equipo}">${escFan(e.nombre)}</option>`).join('');
+            const saved=localStorage.getItem(KEY); if(saved && window.HINCHA_DATA.equipos.some(e=>String(e.id_equipo)===String(saved))) sel.value=saved;
+            sel.addEventListener('change',render); render();
+        }catch(e){ document.getElementById('modo-hincha-content').innerHTML='<div class="alert alert-warning">No se pudo cargar el modo hincha. Verifica la conexión con la API.</div>'; }
+    });
+})();
+</script>
+
+    
+<script src="js/liga-mobile.js?v=20261008mobile"></script>
+</body>
+
+</html>

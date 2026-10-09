@@ -1,0 +1,261 @@
+{
+	"info": {
+		"name": "Liga Provincial de Futsal Vaca Diez #1 - API",
+		"description": "Colección de pruebas de la API REST del Sistema Web para la Administración de Información de Campeonato de Fútbol de Salón de la Primera \"A\" de la Liga Provincial de Futsal Vaca Diez #1 de la ciudad de Riberalta.\n\nEvidencia de pruebas funcionales y de integración realizadas sobre cada operación CRUD (Agregar, Editar, Eliminar, Buscar) de la API, antes de conectarla con la interfaz visual.\n\nConfigura la variable {{base_url}} según tu entorno (por defecto: http://localhost/liga_futsal/api).",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"variable": [
+		{ "key": "base_url", "value": "http://localhost/liga_futsal/api" },
+		{ "key": "apikey", "value": "sfgfgdfhdfhdgfhrtwertwedsfasdfasde" }
+	],
+	"item": [
+		{
+			"name": "Autenticación",
+			"item": [
+				{
+					"name": "Login (correcto)",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{ "key": "correo", "value": "admin@ligafutsal.com" },
+								{ "key": "password", "value": "Admin123*" }
+							]
+						},
+						"url": "{{base_url}}/login.php"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Status 200', () => pm.response.to.have.status(200));",
+							"pm.test('Devuelve datos del usuario sin contraseña', () => {",
+							"  const json = pm.response.json();",
+							"  pm.expect(json.results).to.have.property('correo');",
+							"  pm.expect(json.results).to.not.have.property('password');",
+							"});"
+						]}
+					}]
+				},
+				{
+					"name": "Login (contraseña incorrecta)",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{ "key": "correo", "value": "admin@ligafutsal.com" },
+								{ "key": "password", "value": "clave-incorrecta" }
+							]
+						},
+						"url": "{{base_url}}/login.php"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Rechaza con status 400', () => pm.response.to.have.status(400));"
+						]}
+					}]
+				},
+				{
+					"name": "Login sin apikey (debe rechazar)",
+					"request": {
+						"method": "POST",
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{ "key": "correo", "value": "admin@ligafutsal.com" },
+								{ "key": "password", "value": "Admin123*" }
+							]
+						},
+						"url": "{{base_url}}/login.php"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Rechaza sin apikey (401)', () => pm.response.to.have.status(401));"
+						]}
+					}]
+				}
+			]
+		},
+		{
+			"name": "Equipos (CRUD)",
+			"item": [
+				{
+					"name": "GET - Listar equipos",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=equipos"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Status 200', () => pm.response.to.have.status(200));",
+							"pm.test('Devuelve un arreglo', () => pm.expect(pm.response.json().results).to.be.an('array'));"
+						]}
+					}]
+				},
+				{
+					"name": "POST - Crear equipo (sin sesión, debe rechazar)",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{ "key": "nombre", "value": "Equipo de Prueba Postman" },
+								{ "key": "estado", "value": "1" }
+							]
+						},
+						"url": "{{base_url}}/index.php?table=equipos&token=no&except=id_equipo"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Rechaza sin sesión de servidor (401)', () => pm.response.to.have.status(401));"
+						]}
+					}]
+				},
+				{
+					"name": "DELETE - Categoría en uso (debe rechazar por integridad referencial)",
+					"request": {
+						"method": "DELETE",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=categorias&token=no&except=id_categoria&id=1&nameId=id_categoria"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('La base protege la integridad referencial (400, no 200)', () => pm.response.to.have.status(400));"
+						]}
+					}]
+				}
+			]
+		},
+		{
+			"name": "Jugadores (CRUD)",
+			"item": [
+				{
+					"name": "GET - Listar jugadores",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=jugadores"
+					}
+				},
+				{
+					"name": "GET - Jugadores filtrados por equipo",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=jugadores&linkTo=id_equipo&equalTo=1"
+					}
+				}
+			]
+		},
+		{
+			"name": "Partidos y Resultados (CRUD)",
+			"item": [
+				{
+					"name": "GET - Listar partidos",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=partidos"
+					}
+				},
+				{
+					"name": "GET - Partidos programados",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=partidos&linkTo=estado&equalTo=Programado"
+					}
+				},
+				{
+					"name": "GET - Tabla de posiciones",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=tabla_posiciones&orderBy=puntos&orderMode=DESC"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Ordenada de mayor a menor puntaje', () => {",
+							"  const filas = pm.response.json().results;",
+							"  for(let i=1; i<filas.length; i++){",
+							"    pm.expect(Number(filas[i].puntos)).to.be.at.most(Number(filas[i-1].puntos));",
+							"  }",
+							"});"
+						]}
+					}]
+				},
+				{
+					"name": "GET - Tabla vacía (evidencia del fix 'results no es array')",
+					"request": {
+						"method": "GET",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"url": "{{base_url}}/index.php?table=tabla_posiciones&linkTo=id_campeonato&equalTo=9999"
+					},
+					"description": "Con un id_campeonato inexistente, la API devuelve 'results':'Not Found' en vez de una lista vacía. El frontend (apiGet en admin-app.js) normaliza esto a un arreglo vacío para no romper la pantalla."
+				}
+			]
+		},
+		{
+			"name": "Registro público de Aficionado",
+			"item": [
+				{
+					"name": "POST - Registro como Aficionado (permitido sin sesión)",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{ "key": "nombre", "value": "Prueba" },
+								{ "key": "apellido", "value": "Postman" },
+								{ "key": "usuario", "value": "prueba.postman" },
+								{ "key": "correo", "value": "prueba.postman@example.com" },
+								{ "key": "password", "value": "Prueba123*" },
+								{ "key": "rol", "value": "Aficionado" },
+								{ "key": "estado", "value": "1" }
+							]
+						},
+						"url": "{{base_url}}/index.php?table=usuarios&token=no&except=id_usuario"
+					}
+				},
+				{
+					"name": "POST - Intento de auto-registro como Administrador (debe rechazar)",
+					"request": {
+						"method": "POST",
+						"header": [{ "key": "Authorization", "value": "{{apikey}}" }],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{ "key": "nombre", "value": "Intruso" },
+								{ "key": "apellido", "value": "Postman" },
+								{ "key": "usuario", "value": "intruso" },
+								{ "key": "correo", "value": "intruso@example.com" },
+								{ "key": "password", "value": "Intruso123*" },
+								{ "key": "rol", "value": "Administrador" },
+								{ "key": "estado", "value": "1" }
+							]
+						},
+						"url": "{{base_url}}/index.php?table=usuarios&token=no&except=id_usuario"
+					},
+					"event": [{
+						"listen": "test",
+						"script": { "exec": [
+							"pm.test('Rechaza auto-registro como Administrador (401)', () => pm.response.to.have.status(401));"
+						]}
+					}]
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Buscar | Liga Provincial de Futsal Vaca Diez #1</title>
+<link rel="shortcut icon" href="img/icons/favicon.png">
+<link rel="stylesheet" href="css/fontawesome-all.min.css">
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/main.css">
+<link rel="stylesheet" href="css/responsive.css">
+<link rel="stylesheet" href="css/liga.css?v=20261008mobile2">
+</head>
+<body class="gray-bg">
+<section class="menu-area"><div class="container-xl"><nav class="navbar navbar-expand-lg navbar-light bg-light">
+<a href="index.html" class="navbar-brand"><img src="img/logo-dark.png" alt="Liga Futsal" height="35"></a>
+<div class="main-nav-wrap"><ul class="liga-navbar">
+<li><a href="index.html"><i class="fas fa-home"></i><span>Inicio</span></a></li>
+<li><a href="equipos.html"><i class="fas fa-shield-alt"></i><span>Equipos</span></a></li>
+<li><a href="calendario.html"><i class="fas fa-calendar-alt"></i><span>Calendario</span></a></li>
+<li class="liga-has-dropdown liga-more-menu"><a href="#"><i class="fas fa-ellipsis-h"></i><span>Más opciones</span> <i class="fas fa-chevron-down liga-menu-arrow"></i></a><div class="liga-dropdown">
+<a href="eliminatoria.html"><i class="fas fa-trophy"></i> Eliminatoria</a><a href="estadisticas.html"><i class="fas fa-chart-bar"></i> Estadísticas</a><a href="index.html#tabla-posiciones"><i class="fas fa-list-ol"></i> Tabla de posiciones</a><a href="noticias.html"><i class="fas fa-newspaper"></i> Noticias</a><a href="about_us.html"><i class="fas fa-info-circle"></i> Sobre la Liga</a></div></li>
+</ul></div>
+<form class="inline-form"><div class="input-group search-box mobile-search"><input type="text" name="query" class="form-control" placeholder="Buscar equipo o partido"><div class="input-group-append"><button class="btn" type="submit"><i class="fas fa-search"></i></button></div></div></form>
+<div class="sign-in-box btn-group" id="liga-sesion-box"><a href="login.html" class="btn btn-sign-in">Administrador</a></div>
+</nav></div></section>
+
+<section class="liga-section" style="padding-top:42px;min-height:65vh"><div class="container-lg">
+<h2 class="liga-section-title">Resultados de búsqueda</h2>
+<div id="busqueda-resumen" class="text-muted mb-4"></div>
+<div class="row" id="busqueda-resultados"><div class="col-12 text-center text-muted py-5">Buscando...</div></div>
+</div></section>
+<footer class="liga-footer"><div class="container-lg"><div class="liga-copyright text-center">&copy; 2026 Liga Provincial de Futsal Vaca Diez #1 &mdash; Riberalta</div></div></footer>
+<script src="js/liga-api.js?v=20261008final"></script><script src="js/buscador-publico.js"></script>
+<script>
+(async function(){
+ const q=new URLSearchParams(location.search).get('q')||''; const term=q.toLowerCase().trim();
+ const box=document.getElementById('busqueda-resultados'), resumen=document.getElementById('busqueda-resumen');
+ if(!term){resumen.textContent='Escribe un equipo o partido en el buscador.'; box.innerHTML='<div class="col-12"><div class="liga-fan-empty">🔎 Busca por nombre de equipo o partido.</div></div>';return;}
+ resumen.innerHTML='Buscando: <strong>'+esc(term)+'</strong>';
+ const [equipos,partidos,resultados]=await Promise.all([apiGet('equipos'),apiGet('partidos'),apiGet('resultados')]);
+ const mapa={};(equipos||[]).forEach(e=>mapa[e.id_equipo]=e.nombre);
+ const eq=(equipos||[]).filter(e=>String(e.nombre||'').toLowerCase().includes(term));
+ const ps=(partidos||[]).filter(p=>(mapa[p.id_equipo_local]+' '+mapa[p.id_equipo_visitante]+' '+(p.fecha||'')+' '+(p.jornada||'')).toLowerCase().includes(term));
+ let html='';
+ if(eq.length){html+='<div class="col-12"><h4 class="liga-subtitle">Equipos</h4></div>';eq.forEach(e=>html+=`<div class="col-md-4 mb-3"><a href="ficha_equipo.html?id=${e.id_equipo}" class="liga-search-card"><span class="liga-search-icon">🛡️</span><div><strong>${esc(e.nombre)}</strong><small>Ver ficha del equipo</small></div></a></div>`);}
+ if(ps.length){html+='<div class="col-12 mt-3"><h4 class="liga-subtitle">Partidos</h4></div>';ps.slice(0,20).forEach(p=>{const r=(resultados||[]).find(x=>String(x.id_partido)===String(p.id_partido));html+=`<div class="col-md-6 mb-3"><a href="partido.html?id=${p.id_partido}" class="liga-search-card"><span class="liga-search-icon">⚽</span><div><strong>${esc(mapa[p.id_equipo_local]||'Local')} <span class="liga-search-vs">${r?esc(r.goles_local+' - '+r.goles_visitante):'vs'}</span> ${esc(mapa[p.id_equipo_visitante]||'Visitante')}</strong><small>${esc(p.fecha||'Fecha por confirmar')} · Jornada ${esc(p.jornada||'-')} · Ver partido</small></div></a></div>`;});}
+ if(!html) html='<div class="col-12"><div class="liga-fan-empty">No encontramos resultados para <strong>'+esc(q)+'</strong>.</div></div>';
+ box.innerHTML=html;
+ function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));}
+})();
+</script>
+</body></html>

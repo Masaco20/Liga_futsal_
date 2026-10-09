@@ -1,0 +1,6 @@
+# Esta carpeta solo sirve archivos de imagen, nunca los ejecuta.
+# Aunque alguien lograra subir un archivo con código PHP disfrazado
+# de imagen, Apache jamás lo va a interpretar como script acá.
+php_flag engine off
+AddType text/plain .php .php3 .phtml .pht
+Options -Indexes

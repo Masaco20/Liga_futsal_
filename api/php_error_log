@@ -1,0 +1,24 @@
+[27-Sep-2026 02:56:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Connection" not found in D:\xampp\htdocs\liga_futsal\api\index.php:39
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\liga_futsal\api\index.php on line 39
+[27-Sep-2026 02:57:54 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Connection" not found in D:\xampp\htdocs\liga_futsal\api\index.php:39
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\liga_futsal\api\index.php on line 39
+[27-Sep-2026 02:59:09 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Connection" not found in D:\xampp\htdocs\liga_futsal\api\index.php:39
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\liga_futsal\api\index.php on line 39
+[27-Sep-2026 02:59:25 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Connection" not found in D:\xampp\htdocs\liga_futsal\api\index.php:39
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\liga_futsal\api\index.php on line 39
+[27-Sep-2026 03:00:18 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Connection" not found in D:\xampp\htdocs\liga_futsal\api\index.php:39
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\liga_futsal\api\index.php on line 39
+[27-Sep-2026 03:01:34 Europe/Berlin] PHP Fatal error:  Uncaught Error: Class "Connection" not found in D:\xampp\htdocs\liga_futsal\api\index.php:39
+Stack trace:
+#0 {main}
+  thrown in D:\xampp\htdocs\liga_futsal\api\index.php on line 39

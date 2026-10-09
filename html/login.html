@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Iniciar sesión | Liga Provincial de Futsal Vaca Diez #1</title>
+    <link name="favicon" type="image/x-icon" href="img/icons/favicon.png" rel="shortcut icon">
+    <link rel="favicon" href="img/icons/favicon.ico">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/fontawesome-all.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700|Barlow+Condensed:600,700,800" rel="stylesheet">
+    <link rel="stylesheet" href="css/admin.css">
+    <link rel="stylesheet" href="css/liga.css?v=20261008mobile2">
+</head>
+<body>
+
+    <div class="adm-login-wrap liga-pitch-bg">
+        <div class="liga-login-card">
+
+            <div class="liga-login-crest">
+                <i class="fas fa-futbol"></i>
+            </div>
+
+            <h2 class="text-center">Liga Provincial de Futsal</h2>
+            <p class="text-center liga-login-sub">Vaca Diez #1 &mdash; Primera &quot;A&quot;</p>
+
+            <ul class="nav nav-tabs justify-content-center mb-3" id="loginTabs">
+                <li class="nav-item">
+                    <a class="nav-link active" data-tab="tab-login" href="#">Iniciar sesión</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-tab="tab-registro" href="#">Registrarse</a>
+                </li>
+            </ul>
+
+            <!-- ===== Iniciar sesión ===== -->
+            <div id="tab-login">
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" class="form-control" id="loginCorreo" required autofocus>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" id="loginContrasena" required>
+                    </div>
+                    <div id="loginError" class="alert alert-danger py-2" style="display:none;"></div>
+                    <button type="submit" class="btn btn-block adm-btn-add text-white" id="loginBtn">
+                        <i class="fas fa-sign-in-alt"></i> Ingresar
+                    </button>
+                </form>
+            </div>
+
+            <!-- ===== Registrarse (cuenta de aficionado) ===== -->
+            <div id="tab-registro" style="display:none;">
+                <p class="text-muted small text-center">
+                    Crea tu cuenta de <strong>aficionado</strong> para seguir a tu equipo.
+                    Esta cuenta no tiene acceso al panel de administración.
+                </p>
+                <form id="registroForm">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label>Nombre</label>
+                            <input type="text" class="form-control" id="regNombre" required>
+                        </div>
+                        <div class="form-group col-6">
+                            <label>Apellido</label>
+                            <input type="text" class="form-control" id="regApellido" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Usuario</label>
+                        <input type="text" class="form-control" id="regUsuario" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Correo electrónico</label>
+                        <input type="email" class="form-control" id="regCorreo" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Contraseña</label>
+                        <input type="password" class="form-control" id="regContrasena" required>
+                    </div>
+                    <div id="registroError" class="alert alert-danger py-2" style="display:none;"></div>
+                    <button type="submit" class="btn btn-block adm-btn-add text-white" id="registroBtn">
+                        <i class="fas fa-user-plus"></i> Crear cuenta
+                    </button>
+                </form>
+            </div>
+
+            <div class="text-center mt-3">
+                <a href="index.html" class="liga-login-back"><i class="fas fa-arrow-left"></i> Volver al sitio</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth.js?v=20261008fix1"></script>
+    <script>
+        // ----- cambio de pestañas -----
+        document.querySelectorAll("#loginTabs .nav-link").forEach(tab => {
+            tab.addEventListener("click", (e) => {
+                e.preventDefault();
+                document.querySelectorAll("#loginTabs .nav-link").forEach(t => t.classList.remove("active"));
+                tab.classList.add("active");
+                document.getElementById("tab-login").style.display = tab.dataset.tab === "tab-login" ? "block" : "none";
+                document.getElementById("tab-registro").style.display = tab.dataset.tab === "tab-registro" ? "block" : "none";
+            });
+        });
+
+        function irSegunRol(rol) {
+            window.location.href = (rol === "Aficionado") ? "index.html" : "admin.html";
+        }
+
+        // ----- iniciar sesión -----
+        document.getElementById("loginForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("loginBtn");
+            const errorBox = document.getElementById("loginError");
+            errorBox.style.display = "none";
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Ingresando...';
+
+            const correo = document.getElementById("loginCorreo").value.trim();
+            const contrasena = document.getElementById("loginContrasena").value;
+
+            try {
+                const resultado = await intentarLogin(correo, contrasena);
+                if (resultado.ok) {
+                    irSegunRol(resultado.usuario.rol);
+                } else {
+                    errorBox.textContent = resultado.mensaje;
+                    errorBox.style.display = "block";
+                }
+            } catch (err) {
+                errorBox.textContent = "No se pudo conectar con la API. Revisa AUTH_API_BASE_URL en js/auth.js.";
+                errorBox.style.display = "block";
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Ingresar';
+        });
+
+        // ----- registrarse (aficionado) -----
+        document.getElementById("registroForm").addEventListener("submit", async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById("registroBtn");
+            const errorBox = document.getElementById("registroError");
+            errorBox.style.display = "none";
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creando cuenta...';
+
+            const datos = {
+                nombre: document.getElementById("regNombre").value.trim(),
+                apellido: document.getElementById("regApellido").value.trim(),
+                usuario: document.getElementById("regUsuario").value.trim(),
+                correo: document.getElementById("regCorreo").value.trim(),
+                contrasena: document.getElementById("regContrasena").value
+            };
+
+            try {
+                const resultado = await registrarAficionado(datos);
+                if (resultado.ok) {
+                    const loginResultado = await intentarLogin(datos.correo, datos.contrasena);
+                    if (loginResultado.ok) {
+                        irSegunRol(loginResultado.usuario.rol);
+                        return;
+                    }
+                    // se creó la cuenta pero el login automático falló: manda a la pestaña de login
+                    document.querySelector('#loginTabs .nav-link[data-tab="tab-login"]').click();
+                } else {
+                    errorBox.textContent = resultado.mensaje;
+                    errorBox.style.display = "block";
+                }
+            } catch (err) {
+                errorBox.textContent = "No se pudo conectar con la API. Revisa AUTH_API_BASE_URL en js/auth.js.";
+                errorBox.style.display = "block";
+            }
+
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fas fa-user-plus"></i> Crear cuenta';
+        });
+
+        // si ya hay sesión activa, entra directo
+        const sesionYaActiva = sesionActual();
+        if (sesionYaActiva) {
+            irSegunRol(sesionYaActiva.rol);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,360 @@
+
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <title>Eliminatoria | Liga Provincial de Futsal Vaca Diez #1</title>
+        <meta
+            http-equiv="Content-Type"
+            content="text/html; charset=UTF-8"
+        >
+        <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+        >
+
+        <link name="favicon" type="image/x-icon" href="img/icons/favicon.png" rel="shortcut icon">
+        <link rel="favicon" href="img/icons/favicon.ico">
+        <link rel="apple-touch-icon" href="default/img/icons/icon.png">
+        <link rel="stylesheet" href="css/jquery.webui-popover.min.css">
+        <link rel="stylesheet" href="css/select2.min.css">
+        <link rel="stylesheet" href="css/slick.css">
+        <link rel="stylesheet" href="css/slick-theme.css">
+        <link rel="stylesheet" href="css/fontawesome-all.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/bootstrap-tagsinput.css">
+        <link rel="stylesheet" href="css/main.css">
+        <link rel="stylesheet" href="css/responsive.css">
+        <link href="https://fonts.googleapis.com/css?family=Barlow+Condensed:600,700,800" rel="stylesheet">
+        <link rel="stylesheet" href="css/liga.css?v=20261008mobile2">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,400i,600,700" rel="stylesheet">
+        <link rel="stylesheet" href="css/toastr.css">
+        <link rel="stylesheet" href="css/jquery.nestable.min.css">
+        <script src="js/jquery-3.3.1.min.js"></script>
+
+        <style>
+:root{--g:#063b27;--g2:#0b6847;--gold:#d7aa3d;--gold2:#f4d57d;--cream:#f7f0df;--ink:#07130e;--line:rgba(215,170,61,.75)}
+.elim-hero{position:relative;overflow:hidden;margin:0 0 18px;padding:24px 20px 20px;border-radius:3px;color:#fff;text-align:center;background:radial-gradient(circle at 50% 90%,rgba(215,170,61,.25),transparent 34%),linear-gradient(145deg,#03150d,#07452f 52%,#03150d);border:1px solid rgba(215,170,61,.55);box-shadow:0 14px 34px rgba(0,0,0,.14)}
+.elim-hero .hero-kicker{font-size:.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--gold2);font-weight:700}.elim-hero h1{margin:5px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:2.35rem;line-height:1;text-transform:uppercase;letter-spacing:2px;font-weight:800}.elim-hero p{margin:6px 0 0;color:#e8e1d0;font-size:.82rem}.elim-trophy{margin:8px auto 0;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid rgba(244,213,125,.7);background:rgba(0,0,0,.2);color:var(--gold2);font-size:1.35rem}
+.elim-selector{background:#fff;border:1px solid #e5e1d7;padding:12px 15px;margin-bottom:14px;box-shadow:0 5px 18px rgba(0,0,0,.04)}.elim-selector label{font-weight:700;text-transform:uppercase;letter-spacing:.7px;font-size:.7rem!important;color:#59675f!important}
+.campeon-banner{position:relative;overflow:hidden;background:radial-gradient(circle at 50% 10%,rgba(244,213,125,.24),transparent 38%),linear-gradient(145deg,#06170f,#0a4b32,#06140e);color:#fff;border:1px solid var(--gold);border-radius:4px;padding:18px 20px;text-align:center;margin-bottom:14px;box-shadow:0 12px 30px rgba(0,0,0,.2)}
+.campeon-banner .trofeo{font-size:1.9rem;color:var(--gold2);text-shadow:0 0 18px rgba(244,213,125,.25)}.campeon-banner h3{margin:3px 0 0;font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;letter-spacing:1px;text-transform:uppercase;font-weight:800;color:#ffe4a0}.campeon-banner .campeon-escudo{width:48px;height:48px;border-radius:50%;object-fit:cover;margin-bottom:4px;border:2px solid var(--gold2);background:#fff}
+.bracket-shell{position:relative;overflow:hidden;padding:12px;background:linear-gradient(135deg,#06160f,#092b1e 50%,#04110c);border:1px solid rgba(215,170,61,.42);box-shadow:0 15px 34px rgba(0,0,0,.13)}
+.bracket-title{color:#f4d57d;text-align:center;text-transform:uppercase;letter-spacing:2px;font-family:'Barlow Condensed',sans-serif;font-size:1rem;margin:0 0 7px}.bracket-wrap{display:grid;grid-template-columns:minmax(205px,1fr) minmax(205px,.9fr) minmax(235px,1.05fr);gap:42px;align-items:center;min-height:510px;padding:20px 28px;position:relative;overflow:hidden}
+.bracket-ronda{display:flex;flex-direction:column;justify-content:space-around;min-width:0;height:100%;position:relative}.bracket-ronda h6{text-align:center;color:var(--gold2);font-family:'Barlow Condensed',sans-serif;font-size:.95rem;letter-spacing:1.5px;margin:0 0 10px;text-transform:uppercase}.bracket-ronda h6:after{content:'';display:block;width:38px;height:2px;margin:6px auto 0;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
+.bracket-match{position:relative;background:linear-gradient(180deg,#11271d,#071710);border:1px solid rgba(215,170,61,.5);border-radius:3px;box-shadow:0 6px 18px rgba(0,0,0,.24);z-index:2;overflow:visible}.bracket-match:hover{border-color:var(--gold2);transform:translateY(-1px);transition:.15s ease}.bracket-equipo{display:flex;align-items:center;gap:7px;padding:8px 9px;font-size:.76rem;color:#f1eee6;border-bottom:1px solid rgba(255,255,255,.07);min-height:35px}.bracket-equipo:last-child{border-bottom:none}.bracket-equipo.ganador{font-weight:800;color:#fff;background:linear-gradient(90deg,rgba(215,170,61,.2),rgba(215,170,61,.02))}.bracket-equipo .pts{font-weight:800;margin-left:auto;color:var(--gold2);font-size:.95rem}.bracket-escudo{width:23px;height:23px;border-radius:50%;object-fit:cover;flex-shrink:0;background:#fff;border:1px solid rgba(215,170,61,.4)}.bracket-escudo-ini{width:23px;height:23px;border-radius:50%;background:#0b6a48;color:#fff;font-size:.56rem;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;border:1px solid rgba(215,170,61,.4)}.bracket-meta{text-align:center;font-size:.62rem;color:#b9b3a5;padding:5px 4px;background:rgba(0,0,0,.13)}
+.bracket-conn-right::after{content:'';position:absolute;right:-42px;top:50%;width:42px;height:1px;background:var(--line);opacity:.85}.bracket-conn-right::before{content:'';position:absolute;right:-42px;top:50%;width:1px;height:50%;background:var(--line);opacity:.85}.bracket-ronda-2 .bracket-match:after{content:'';position:absolute;left:-42px;top:50%;width:42px;height:1px;background:var(--line);opacity:.85}.bracket-ronda-2 .bracket-match:before{content:'';position:absolute;left:-42px;top:25%;height:50%;width:1px;background:var(--line);opacity:.85}
+.bracket-ronda-final .bracket-match{border-color:var(--gold2);box-shadow:0 0 24px rgba(215,170,61,.13),0 8px 24px rgba(0,0,0,.28);transform:scale(1.03)}.bracket-ronda-final .bracket-match:before{content:'🏆';position:absolute;left:50%;top:-29px;transform:translateX(-50%);font-size:1.15rem}.final-label{text-align:center;color:#ffe39a;font-size:.7rem;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:5px}.final-score{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;color:#fff;text-align:center;margin:4px 0 7px;font-weight:700}
+.empty-bracket{text-align:center;color:#c9c2b2;padding:70px 20px}.winner-dot{color:var(--gold2);font-size:.68rem;margin-left:2px}
+@media(max-width:900px){.bracket-wrap{grid-template-columns:repeat(3,240px);overflow-x:auto;min-height:500px;padding-left:15px;padding-right:15px}.bracket-shell{overflow:auto}.bracket-ronda{min-width:240px}}
+@media(max-width:576px){.elim-hero h1{font-size:1.95rem}.bracket-wrap{grid-template-columns:220px 220px 245px;gap:34px}.bracket-ronda-2 .bracket-match:after{left:-34px;width:34px}.bracket-ronda-2 .bracket-match:before{left:-34px}.bracket-conn-right::after{right:-34px;width:34px}.bracket-conn-right::before{right:-34px}}
+</style>
+    </head>
+
+    <body
+        class="gray-bg"
+        cz-shortcut-listen="true"
+    >
+
+        <section class="menu-area">
+
+            <div class="container-xl">
+
+                <div class="row">
+
+                    <div class="col">
+
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+                            <ul class="mobile-header-buttons">
+                                <li>
+                                    <a
+                                        class="mobile-nav-trigger"
+                                        href="#"
+                                    >
+                                        Menu
+                                        <span></span>
+                                    </a>
+                                </li>
+                                <li>
+                                    <a
+                                        class="mobile-search-trigger"
+                                        href="#"
+                                    >
+                                        Search
+                                        <span></span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <a
+                                href="index.html"
+                                class="navbar-brand"
+                            >
+                                <img
+                                    src="img/logo-dark.png"
+                                    alt
+                                    height="35"
+                                >
+                            </a>
+
+                            <div class="main-nav-wrap">
+
+                                <ul class="liga-navbar">
+                                    <li><a href="index.html"><i class="fas fa-home d-inline"></i><span>Inicio</span></a></li>
+                                    <li class="liga-has-dropdown">
+                                        <a href="equipos.html"><i class="fas fa-shield-alt d-inline"></i><span>Equipos</span> <i class="fas fa-chevron-down" style="font-size:10px; margin-left:4px;"></i></a>
+                                        <div class="liga-dropdown">
+                                            <a href="equipos.html"><i class="fas fa-list"></i> Todos los equipos</a>
+                                            <a href="ficha_equipo.html"><i class="fas fa-users"></i> Ficha de equipo</a>
+                                        </div>
+                                    </li>
+                                    <li><a href="calendario.html"><i class="fas fa-calendar-alt d-inline"></i><span>Calendario</span></a></li>
+                                    <li><a href="index.html#tabla-posiciones"><i class="fas fa-list-ol d-inline"></i><span>Tabla</span></a></li>
+                                    <li><a href="estadisticas.html"><i class="fas fa-chart-bar d-inline"></i><span>Estadísticas</span></a></li>
+                                    <li><a href="eliminatoria.html"><i class="fas fa-trophy d-inline"></i><span>Eliminatoria</span></a></li>
+                                </ul>
+
+                            </div>
+
+                            <form
+                                class="inline-form"
+                                style="width: 100%;"
+                            >
+                                <div class="input-group search-box mobile-search">
+                                    <input
+                                        type="text"
+                                        name="query"
+                                        class="form-control"
+                                        placeholder="Buscar equipo o partido"
+                                    >
+                                    <div class="input-group-append">
+                                        <button
+                                            class="btn"
+                                            type="submit"
+                                        >
+                                            <i class="fas fa-search"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+
+                            <span class="signin-box-move-desktop-helper"></span>
+
+                            <div class="sign-in-box btn-group" id="liga-sesion-box">
+
+                                <a
+                                    href="login.html"
+                                    class="btn btn-sign-in"
+                                    style="margin-right:8px;"
+                                >
+                                    Iniciar sesión
+                                </a>
+
+                                <a
+                                    href="login.html"
+                                    class="btn btn-sign-in"
+                                >
+                                    Administrador
+                                </a>
+
+                            </div>
+
+                        </nav>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+        <section class="liga-section" style="padding-top:34px;">
+            <div class="container-lg">
+                <div class="elim-hero">
+                    <div class="hero-kicker">Liga Provincial de Futsal · Riberalta</div>
+                    <div class="elim-trophy"><i class="fas fa-trophy"></i></div>
+                    <h1>Camino a la Gloria</h1>
+                    <p>Cuadro oficial de eliminatorias · Cuartos · Semifinal · Final</p>
+                </div>
+
+                <div class="elim-selector">
+                    <div class="form-group mb-0" style="max-width:420px;">
+                        <label>Torneo</label>
+                        <select class="form-control" id="elim-campeonato"></select>
+                    </div>
+                </div>
+
+                <div id="elim-campeon-zona"></div>
+                <div class="bracket-shell">
+                    <div id="elim-bracket">
+                        <div class="text-center py-5" style="color:#d9ad4a;">Cargando cuadro...</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<footer class="liga-footer">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <h5>Liga Provincial de Futsal</h5>
+                        <p>Riberalta, Beni &mdash; Bolivia</p>
+                    </div>
+                    <div class="col-md-6 mb-3 text-md-right liga-social">
+                        <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
+                        <a href="#"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                        <a href="#"><i class="fas fa-envelope"></i> Correo</a>
+                    </div>
+                </div>
+                <div class="liga-copyright text-center">
+                    &copy; 2026 Liga Provincial de Futsal Vaca Diez #1 &mdash; Riberalta
+                </div>
+            </div>
+        </footer>
+
+<script>
+(async function(){
+    const API_BASE_URL = "../api/index.php";
+    const apiGet = async (tabla) => {
+        try {
+            const r = await fetch(`${API_BASE_URL}?table=${tabla}`, {cache:'no-store'});
+            const d = await r.json();
+            return Array.isArray(d.results) ? d.results : [];
+        } catch(e) { console.warn('No se pudo cargar', tabla, e); return []; }
+    };
+
+    const [campeonatos,equipos,partidosTodos,resultados,campeonatoEquipos] = await Promise.all([
+        apiGet('campeonatos'), apiGet('equipos'), apiGet('partidos'), apiGet('resultados'), apiGet('campeonato_equipos')
+    ]);
+    const mapaEquipos={}; equipos.forEach(e=>mapaEquipos[e.id_equipo]=e);
+    const nombreEq=id=>(mapaEquipos[id]?.nombre)||`Equipo #${id||'?'}`;
+    const img=v=>{if(!v)return '';if(/^https?:\/\//.test(v))return v;return `../api/${v}`;};
+    const ini=n=>(n||'').split(' ').filter(Boolean).slice(0,2).map(x=>x[0]).join('').toUpperCase();
+    const escudo=id=>{const e=mapaEquipos[id];if(!e)return '<span class="bracket-escudo-ini">?</span>';return e.escudo?`<img class="bracket-escudo" src="${img(e.escudo)}" alt="">`:`<span class="bracket-escudo-ini">${ini(e.nombre)}</span>`;};
+    const esc=s=>String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+    const sel=document.getElementById('elim-campeonato'), bracket=document.getElementById('elim-bracket'), campeon=document.getElementById('elim-campeon-zona');
+
+    const orden=campeonatos.slice().sort((a,b)=>Number(b.id_campeonato)-Number(a.id_campeonato));
+    sel.innerHTML=orden.map(c=>`<option value="${c.id_campeonato}">${esc(c.nombre||'Campeonato')}${c.temporada?' · '+esc(c.temporada):''}${String(c.estado).toLowerCase()==='activo'?' · Activo':''}</option>`).join('');
+
+    const faseTexto=p=>{
+        const texto=String(p?.observaciones||'').toLowerCase();
+        const fase=String(p?.fase||p?.ronda||'').toLowerCase();
+        return `${texto} ${fase}`.trim();
+    };
+    const esKnockout=p=>/(cuartos|quarter|semifinal|playoffs|torneo\s+rel[aá]mpago)/i.test(faseTexto(p)) || /(?:^|[\s·-])final(?:[\s·-]|$)/i.test(faseTexto(p));
+
+    // Por defecto mostramos el campeonato más reciente que realmente tiene
+    // una llave. Así "Eliminatoria" no abre por error el campeonato activo
+    // de Liga que todavía está en fase regular.
+    const queryCampeonato=new URLSearchParams(window.location.search).get('campeonato');
+    const solicitado=orden.find(c=>String(c.id_campeonato)===String(queryCampeonato));
+    const campeonatosConLlave=orden.filter(c=>partidosTodos.some(p=>String(p.id_campeonato)===String(c.id_campeonato) && esKnockout(p)));
+    const activo=solicitado || campeonatosConLlave[0] || orden.find(c=>String(c.estado).toLowerCase()==='activo') || orden[0];
+    if(activo) sel.value=activo.id_campeonato;
+
+    // Nunca usamos grupo NULL como señal de eliminatoria. La fase regular
+    // puede tener grupo vacío; el cuadro debe identificarse por su fase.
+    const faseDe=p=>{
+        const t=faseTexto(p);
+        if(/cuartos|quarter/i.test(t)) return 'Cuartos de Final';
+        if(/semifinal/i.test(t)) return 'Semifinal';
+        if(/(?:^|[\s·-])final(?:[\s·-]|$)/i.test(t) && !/semifinal/i.test(t)) return 'Final';
+        // Los partidos guardados como "Playoffs - top N..." se clasifican
+        // por cantidad: 4 = cuartos, 2 = semifinal, 1 = final.
+        return '';
+    };
+    const resultadoDe=p=>resultados.find(r=>String(r.id_partido)===String(p.id_partido));
+    const ordenPartido=(a,b)=>`${a.fecha||''} ${a.hora||''} ${a.id_partido}`.localeCompare(`${b.fecha||''} ${b.hora||''} ${b.id_partido}`);
+
+    function render(){
+        const c=campeonatos.find(x=>String(x.id_campeonato)===String(sel.value));
+        if(!c){bracket.innerHTML='<div class="empty-bracket">No hay campeonato seleccionado.</div>';campeon.innerHTML='';return;}
+
+        const ps=partidosTodos.filter(p=>String(p.id_campeonato)===String(c.id_campeonato));
+        const genericosPlayoff=ps.filter(p=>/playoffs/i.test(faseTexto(p))).slice().sort(ordenPartido);
+        const fases={
+            'Cuartos de Final':ps.filter(p=>faseDe(p)==='Cuartos de Final'),
+            'Semifinal':ps.filter(p=>faseDe(p)==='Semifinal'),
+            'Final':ps.filter(p=>faseDe(p)==='Final')
+        };
+        if(genericosPlayoff.length===4) fases['Cuartos de Final'].push(...genericosPlayoff);
+        else if(genericosPlayoff.length===2) fases['Semifinal'].push(...genericosPlayoff);
+        else if(genericosPlayoff.length===1) fases['Final'].push(...genericosPlayoff);
+
+        // No se inventan rondas a partir de los últimos partidos de una Liga.
+        // Solo entran al cuadro los partidos identificados como playoffs/cuarto/semifinal/final.
+        const totalKO=Object.values(fases).reduce((n,a)=>n+a.length,0);
+
+        if(!totalKO){
+            campeon.innerHTML=String(c.estado).toLowerCase()==='activo'
+                ? '<div class="text-center text-muted mb-3">Este campeonato todavía está en fase regular: no hay campeón definido.</div>'
+                : '<div class="text-center text-muted mb-3">Este campeonato no tiene una fase eliminatoria registrada.</div>';
+            bracket.innerHTML=`<div class="empty-bracket"><div style="font-size:2rem">🏟️</div><h4 style="color:#f4d57d;margin-top:8px">La fase eliminatoria aún no ha comenzado</h4><p class="mb-1">Los partidos de fase regular no aparecen aquí. Esta pantalla muestra únicamente cuartos de final, semifinal y final.</p><a class="btn btn-sm btn-outline-light mt-2" href="calendario.html">Ver calendario</a></div>`;
+            return;
+        }
+
+        const rondas=[
+            ['Cuartos de Final',fases['Cuartos de Final'].slice().sort(ordenPartido)],
+            ['Semifinal',fases['Semifinal'].slice().sort(ordenPartido)],
+            ['Final',fases['Final'].slice().sort(ordenPartido)]
+        ];
+        const rondasVisibles=rondas.filter(x=>x[1].length);
+        const equiposIniciales=Math.max(...rondasVisibles.map(r=>r[1].length*2));
+        let html=`<div class="bracket-title">Llaves de eliminación directa · ${equiposIniciales} equipos</div><div class="bracket-subtitle" style="color:#d9d3c5;text-align:center;font-size:.72rem;margin-bottom:10px">Los partidos de fase regular no aparecen aquí. Esta pantalla muestra únicamente cuartos de final, semifinal y final.</div><div class="bracket-wrap">`;
+        rondasVisibles.forEach((r,i)=>{
+            const finalR=r[0]==='Final';
+            html+=`<div class="bracket-ronda ${i===1?'bracket-ronda-2':''} ${finalR?'bracket-ronda-final':''}"><h6>${r[0]}</h6>`;
+            r[1].forEach(p=>{
+                const res=resultadoDe(p), jug=!!res, gl=jug?Number(res.goles_local):null, gv=jug?Number(res.goles_visitante):null;
+                const ganadorNorm=String(res.ganador||'').toLowerCase();
+                const winL=jug && (ganadorNorm==='local'||ganadorNorm==='1'||gl>gv);
+                const winV=jug && (ganadorNorm==='visitante'||ganadorNorm==='2'||gv>gl);
+                const estado=jug?'Finalizado':(String(p.estado).toLowerCase()==='programado'?'Por jugar':'Pendiente');
+                html+=`<a href="partido.html?id=${encodeURIComponent(p.id_partido)}" style="text-decoration:none"><div class="bracket-match ${i<rondasVisibles.length-1?'bracket-conn-right':''} ${finalR?'final-match':''}><div class="bracket-equipo ${winL?'ganador':''}">${escudo(p.id_equipo_local)}<span>${esc(nombreEq(p.id_equipo_local))}</span><span class="pts">${jug?gl:''}</span></div><div class="bracket-equipo ${winV?'ganador':''}">${escudo(p.id_equipo_visitante)}<span>${esc(nombreEq(p.id_equipo_visitante))}</span><span class="pts">${jug?gv:''}</span></div><div class="bracket-meta">${estado}</div></div></a>`;
+            });
+            html+='</div>';
+        });
+        html+='</div>';
+        bracket.innerHTML=html;
+
+        // Campeón histórico: se muestra solamente si el torneo está Finalizado,
+        // existe una FINAL explícita y tiene resultado.
+        const fr=fases['Final'].slice().sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')))[0];
+        const resFinal=fr&&resultadoDe(fr);
+        if(String(c.estado).toLowerCase()==='finalizado' && fr && resFinal){
+            const gl=Number(resFinal.goles_local), gv=Number(resFinal.goles_visitante);
+            let cid=null;
+            const ganadorFinal=String(resFinal.ganador||'').toLowerCase();
+            if(ganadorFinal==='local'||ganadorFinal==='1'||gl>gv) cid=fr.id_equipo_local;
+            else if(ganadorFinal==='visitante'||ganadorFinal==='2'||gv>gl) cid=fr.id_equipo_visitante;
+            campeon.innerHTML=cid
+                ? `<div class="campeon-banner">${mapaEquipos[cid]?.escudo?`<img class="campeon-escudo" src="${img(mapaEquipos[cid].escudo)}" alt="">`:''}<div class="trofeo">🏆</div><div style="font-size:.72rem;letter-spacing:2px;text-transform:uppercase;opacity:.85">Campeón del torneo</div><h3>${esc(nombreEq(cid))}</h3><div class="final-score">Final: ${gl} - ${gv}</div></div>`
+                : '<div class="text-center text-muted mb-3">La final terminó empatada. Falta registrar el desempate.</div>';
+        } else if(String(c.estado).toLowerCase()==='activo') {
+            campeon.innerHTML='<div class="text-center text-muted mb-3">Este campeonato todavía está en curso: no hay campeón definido.</div>';
+        } else {
+            campeon.innerHTML='<div class="text-center text-muted mb-3">No se pudo determinar un campeón con los datos registrados.</div>';
+        }
+    }
+    sel.addEventListener('change',render);
+    render();
+})();
+</script>
+
+        <script src="js/auth.js"></script>
+        <script src="js/header-session.js"></script>
+    <script>
+(function(){
+  document.querySelectorAll('.liga-more-trigger').forEach(function(trigger){
+    trigger.addEventListener('click',function(event){
+      event.preventDefault();
+      var menu=trigger.closest('.liga-more-menu');
+      if(menu) menu.classList.toggle('is-open');
+    });
+  });
+})();
+</script>
+<script src="js/liga-mobile.js?v=20261008mobile"></script>
+</body>
+</html>
